@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on 莫小白的博客</title>
+    <link>https://moxiaobai.github.io/post/</link>
+    <description>Recent content in Posts on 莫小白的博客</description>
+    <image>
+      <url>https://moxiaobai.github.io/papermod-cover.png</url>
+      <link>https://moxiaobai.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 25 Sep 2022 17:18:02 +0800</lastBuildDate><atom:link href="https://moxiaobai.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Goroutine</title>
+      <link>https://moxiaobai.github.io/post/go-goroutine/</link>
+      <pubDate>Sun, 25 Sep 2022 17:18:02 +0800</pubDate>
+      
+      <guid>https://moxiaobai.github.io/post/go-goroutine/</guid>
+      <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Restful API示例文档</title>
+      <link>https://moxiaobai.github.io/post/my-first-post/</link>
+      <pubDate>Thu, 15 Sep 2022 11:30:03 +0000</pubDate>
+      
+      <guid>https://moxiaobai.github.io/post/my-first-post/</guid>
+      <description>&lt;p&gt;Restful API示例文档&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

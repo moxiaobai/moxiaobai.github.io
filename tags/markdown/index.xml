@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>markdown on 莫小白的博客</title>
+    <link>https://moxiaobai.github.io/tags/markdown/</link>
+    <description>Recent content in markdown on 莫小白的博客</description>
+    <image>
+      <url>https://moxiaobai.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://moxiaobai.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 15 Sep 2022 11:30:03 +0000</lastBuildDate><atom:link href="https://moxiaobai.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>这是一篇演示文章</title>
+      <link>https://moxiaobai.github.io/post/my-first-post/</link>
+      <pubDate>Thu, 15 Sep 2022 11:30:03 +0000</pubDate>
+      
+      <guid>https://moxiaobai.github.io/post/my-first-post/</guid>
+      <description>接口规范 Sign签名规则 1. sign = md5(apiKey . 时间戳 . 请求uri . apiSecret)
+示例代码
+1 2 3 4 5 6 $apiKey = &amp;#34;11&amp;#34;; $apiSecret = &amp;#34;11&amp;#34;; $time = time(); $uri = &amp;#34;/v1/user/add&amp;#34;; $sign = md5($apiKey.$time.$uri.$apiSecret); 请求url格式 host/uri?time=1629164652&amp;amp;sign=c5571d256785bcad088b181d42ccf4b3
+示例： http://10.0.0.199:5920/v1/user/add?time=1629164652&amp;amp;sign=c5571d256785bcad088b181d42ccf4b3
+响应数据说明 字段 类型 说明 code int 响应code，0表示成功 message string 消息 data mixed 获取结果返回数据 接口列表 查询任务列表（GET） /v1/task/list
+查询条件
+字段 说明 id 任务ID protocol 协议 name 任务名称 tag 标签 host_id 任务节点 modules_id 模块id page 页数 page_size 每页显示数量 查询任务详情(GET) /v1/task/detail/{任务ID}</description>
+    </item>
+    
+  </channel>
+</rss>
