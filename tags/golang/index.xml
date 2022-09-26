@@ -12,7 +12,7 @@
     <language>zh</language>
     <lastBuildDate>Sun, 25 Sep 2022 17:18:02 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Go Goroutine</title>
+      <title>使用Go Goroutine注意事项</title>
       <link>https://momobaba.xyz/post/go-goroutine/</link>
       <pubDate>Sun, 25 Sep 2022 17:18:02 +0800</pubDate>
       
