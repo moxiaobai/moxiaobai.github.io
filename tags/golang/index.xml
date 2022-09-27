@@ -17,7 +17,7 @@
       <pubDate>Sun, 25 Sep 2022 17:18:02 +0800</pubDate>
       
       <guid>https://momobaba.xyz/post/go-goroutine/</guid>
-      <description>&lt;p&gt;Go的协程使用起来很方便，但是有有些坑需要注意: &lt;!-- raw HTML omitted --&gt;1. 启动goroutine时加上 panic recovery机制，避免服务直接不可用 &lt;!-- raw HTML omitted --&gt;2. 不要创建都无法退出的goroutine，会导致goroutine 泄漏&lt;/p&gt;</description>
+      <description>&lt;p&gt;Go的协程使用起来很方便，但是有有些坑需要注意: &lt;!-- raw HTML omitted --&gt;1. 使用goroutine时加上panic recovery机制，避免服务直接不可用 &lt;!-- raw HTML omitted --&gt;2. 不要创建都无法退出的goroutine，会导致goroutine 泄漏&lt;/p&gt;</description>
     </item>
     
   </channel>
