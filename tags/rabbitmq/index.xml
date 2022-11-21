@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>RabbitMQ on 莫小白的博客</title>
+    <link>https://momobaba.xyz/tags/rabbitmq/</link>
+    <description>Recent content in RabbitMQ on 莫小白的博客</description>
+    <image>
+      <url>https://momobaba.xyz/papermod-cover.png</url>
+      <link>https://momobaba.xyz/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 21 Nov 2022 15:30:17 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/rabbitmq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RabbitMQ 交换器常用三种类型介绍</title>
+      <link>https://momobaba.xyz/post/rabbitmq-exchange/</link>
+      <pubDate>Mon, 21 Nov 2022 15:30:17 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/post/rabbitmq-exchange/</guid>
+      <description>&lt;hr&gt;
+&lt;p&gt;RabbitMQ 交换器常用三种类型介绍：direct: (默认)直接交换器；fanout: 广播式交换器； topic:  主题交换器&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,7 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://momobaba.xyz/categories/</loc>
-    <lastmod>2022-11-08T09:05:52+08:00</lastmod>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/tags/php/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/post/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/tags/rabbitmq/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/post/rabbitmq-exchange/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/tags/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.xyz/</loc>
+    <lastmod>2022-11-21T15:30:17+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.xyz/tags/linux/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
@@ -15,15 +39,6 @@
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.xyz/post/nginx-restricts-country-access/</loc>
-    <lastmod>2022-11-08T09:05:52+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.xyz/post/</loc>
-    <lastmod>2022-11-08T09:05:52+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.xyz/tags/</loc>
-    <lastmod>2022-11-08T09:05:52+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.xyz/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.xyz/tags/https/</loc>
@@ -46,9 +61,6 @@
   </url><url>
     <loc>https://momobaba.xyz/post/go-goroutine-disclosure/</loc>
     <lastmod>2022-10-12T21:40:38+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.xyz/tags/php/</loc>
-    <lastmod>2022-10-09T20:29:27+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.xyz/categories/php/</loc>
     <lastmod>2022-10-09T20:29:27+08:00</lastmod>
