@@ -10,7 +10,17 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 21 Nov 2022 15:30:17 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2022 21:28:51 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang pprof性能分析</title>
+      <link>https://momobaba.xyz/post/golang-pprof/</link>
+      <pubDate>Sun, 27 Nov 2022 21:28:51 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/post/golang-pprof/</guid>
+      <description>&lt;p&gt;pprof 是 golang 官方提供的性能调优分析工具，可以对程序进行性能分析，并可视化数据，看起来相当的直观。
+当你的 go 程序遇到性能瓶颈时，可以使用这个工具来进行调试并优化程序。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>RabbitMQ 交换器常用三种类型介绍</title>
       <link>https://momobaba.xyz/post/rabbitmq-exchange/</link>
