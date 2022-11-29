@@ -60,6 +60,17 @@
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
 <meta property="og:title" content="使用Go Goroutine注意事项" />
 <meta property="og:description" content="Go的协程使用起来很方便，但是有有些坑需要注意: 1. 使用goroutine时加上panic recovery机制，避免服务直接不可用 2. 不要创建都无法退出的goroutine，会导致goroutine 泄漏" />
 <meta property="og:type" content="article" />

@@ -61,6 +61,17 @@ nginx中如何实现">
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
 <meta property="og:title" content="Nginx限制国家访问" />
 <meta property="og:description" content="限制某个国家访问或者只允许某个国家访问我们的服务，有两种做法，一种是在Ningx里面限制，一种是在程序里面限制；程序里面下载GeoLite2-Country.mmdb库，实现很简单。今天主要讲
 nginx中如何实现" />

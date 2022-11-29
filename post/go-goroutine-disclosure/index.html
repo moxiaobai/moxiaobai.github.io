@@ -60,6 +60,17 @@
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
 <meta property="og:title" content="如何防止Go Goroutine泄露" />
 <meta property="og:description" content="Go的并发模型虽简化了并发程序的开发难度，但如果不了解使用方法，常常会遇到goroutine泄露的问题。我们可以可以从两方面入手解决，一是预防（了解什么样的代码会产生泄露），二是监控（通过Prometheus采集metrics来监控）" />
 <meta property="og:type" content="article" />

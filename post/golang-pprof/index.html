@@ -61,6 +61,17 @@
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
 <meta property="og:title" content="Golang pprof性能分析" />
 <meta property="og:description" content="pprof 是 golang 官方提供的性能调优分析工具，可以对程序进行性能分析，并可视化数据，看起来相当的直观。
 当你的 go 程序遇到性能瓶颈时，可以使用这个工具来进行调试并优化程序。" />

@@ -60,6 +60,17 @@
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
 <meta property="og:title" content="Prometheus&#43;Grafana监控PHP-FPM" />
 <meta property="og:description" content="为什么要监控php-fpm的状态？ 因为php-fpm多进程模型，线上一般都是static静态进程数配置，很容易因为I/O慢导致进程全部占满，造成拒绝服务。通过Prometheus采集PHP-FPM的性能指标来监控PHP-FPM" />
 <meta property="og:type" content="article" />
