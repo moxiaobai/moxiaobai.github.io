@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>服务发现 on 莫小白的博客</title>
+    <link>https://momobaba.xyz/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>
+    <description>Recent content in 服务发现 on 莫小白的博客</description>
+    <image>
+      <url>https://momobaba.xyz/papermod-cover.png</url>
+      <link>https://momobaba.xyz/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 11 Dec 2022 18:15:43 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Etcd</title>
+      <link>https://momobaba.xyz/post/etcd/</link>
+      <pubDate>Sun, 11 Dec 2022 18:15:43 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/post/etcd/</guid>
+      <description>&lt;p&gt;etcd 是一个高可用强一致性的键值仓库在很多分布式系统架构中得到了广泛的应用，其最经典的使用场景就是服务发现。etcd 中应该尽量只存储系统中服务的配置信息，对于应用数据只推荐把数据量很小，但是更新和访问频次都很高的数据存储在 etcd 中。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

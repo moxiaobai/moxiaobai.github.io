@@ -10,11 +10,20 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 27 Nov 2022 21:28:51 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Dec 2022 18:15:43 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Etcd</title>
+      <link>https://momobaba.xyz/tags/etcd/</link>
+      <pubDate>Sun, 11 Dec 2022 18:15:43 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/tags/etcd/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Golang</title>
       <link>https://momobaba.xyz/tags/golang/</link>
-      <pubDate>Sun, 27 Nov 2022 21:28:51 +0800</pubDate>
+      <pubDate>Sun, 11 Dec 2022 18:15:43 +0800</pubDate>
       
       <guid>https://momobaba.xyz/tags/golang/</guid>
       <description></description>

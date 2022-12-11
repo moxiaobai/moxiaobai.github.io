@@ -10,7 +10,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 27 Nov 2022 21:28:51 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Dec 2022 18:15:43 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>服务发现</title>
+      <link>https://momobaba.xyz/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>
+      <pubDate>Sun, 11 Dec 2022 18:15:43 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Golang</title>
       <link>https://momobaba.xyz/categories/golang/</link>
