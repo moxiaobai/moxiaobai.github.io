@@ -18,11 +18,11 @@
       
       <guid>https://momobaba.xyz/post/go-rabbitmq/</guid>
       <description>&lt;hr&gt;
-&lt;p&gt;Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库&lt;/p&gt;</description>
+&lt;p&gt;Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Etcd</title>
+      <title>Etcd部署以及以及应用</title>
       <link>https://momobaba.xyz/post/etcd/</link>
       <pubDate>Sun, 11 Dec 2022 18:15:43 +0800</pubDate>
       
