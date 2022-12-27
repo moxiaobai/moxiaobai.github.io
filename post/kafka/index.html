@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Kafka介绍以及常见问题总结 | 莫小白的博客</title>
+<meta name="keywords" content="消息队列, Kafka">
+<meta name="description" content="Kafka介绍 Kafka 比较重要的几个概念：
+Producer（生产者） : 产生消息的一方。 Consumer（消费者） : 消费消息的一方。 Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。 Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker Kafka 如何保证消息不丢失 生产者丢失消息的情况 生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去
+最佳实践 使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理 设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交” 设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失 设置 retry.">
+<meta name="author" content="">
+<link rel="canonical" href="https://momobaba.xyz/post/kafka/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<link rel="mask-icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
+/>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Kafka介绍以及常见问题总结" />
+<meta property="og:description" content="Kafka介绍 Kafka 比较重要的几个概念：
+Producer（生产者） : 产生消息的一方。 Consumer（消费者） : 消费消息的一方。 Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。 Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker Kafka 如何保证消息不丢失 生产者丢失消息的情况 生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去
+最佳实践 使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理 设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交” 设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失 设置 retry." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://momobaba.xyz/post/kafka/" /><meta property="og:image" content="https://momobaba.xyz/papermod-cover.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-26T21:31:04&#43;08:00" />
+<meta property="article:modified_time" content="2022-12-26T21:31:04&#43;08:00" /><meta property="og:site_name" content="ExampleSite" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://momobaba.xyz/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Kafka介绍以及常见问题总结"/>
+<meta name="twitter:description" content="Kafka介绍 Kafka 比较重要的几个概念：
+Producer（生产者） : 产生消息的一方。 Consumer（消费者） : 消费消息的一方。 Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。 Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker Kafka 如何保证消息不丢失 生产者丢失消息的情况 生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去
+最佳实践 使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理 设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交” 设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失 设置 retry."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://momobaba.xyz/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Kafka介绍以及常见问题总结",
+      "item": "https://momobaba.xyz/post/kafka/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Kafka介绍以及常见问题总结",
+  "name": "Kafka介绍以及常见问题总结",
+  "description": "Kafka介绍 Kafka 比较重要的几个概念：\nProducer（生产者） : 产生消息的一方。 Consumer（消费者） : 消费消息的一方。 Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。 Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker Kafka 如何保证消息不丢失 生产者丢失消息的情况 生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去\n最佳实践 使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理 设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交” 设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries \u0026gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失 设置 retry.",
+  "keywords": [
+    "消息队列", "Kafka"
+  ],
+  "articleBody": "Kafka介绍 Kafka 比较重要的几个概念：\nProducer（生产者） : 产生消息的一方。 Consumer（消费者） : 消费消息的一方。 Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。 Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker Kafka 如何保证消息不丢失 生产者丢失消息的情况 生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去\n最佳实践 使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理 设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交” 设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries \u003e 0 的 Producer 能够自动重试消息发送，避免消息丢失 设置 retry.backoff.ms = 300，合理估算重试的时间间隔，可以避免无效的频繁重试 消费者丢失消息的情况 处理消息异常导致失败，并且提交了偏移量 最佳实践 确保消息消费完成再提交，设置成 enable.auto.commit = false，并采用手动提交位移的方式 Kafka 如何保证消息不重复消费 kafka出现消息重复消费的原因 服务端侧已经消费的数据没有成功提交 offset Kafka 侧 由于服务端处理业务时间长或者网络链接等等原因让 Kafka 认为服务假死，触发了分区 rebalance 最佳实践 消费消息服务做幂等校验 Kafka消费组 为了提升Kafka消费者服务的性能，需要为Topic多分几个分区，然后试用消费者组(Consumer Group)去消费者topic\n如何合理设置消费者数量 消费者数量太少，会导致一个消费者需要消费多个分区的数据，造成某一个消费者消费压力提升； 消费者数量太多，会导致有的消费者并不会消费任何数据，浪费部署资源 消费者组里的消费者数量与topic的分片数一致，这样可以保证每个消费者消费1个分区，达到最大效率协调 如何保证分区写入顺序 由于业务明确要求确保顺序消费，而kafka只是保证分片内的消费顺序是固定的，但是不同分片之间的消费顺序是无法保证的。\n生产者写入消息到kafka的topic时，kafka将依据不同的策略将数据分配到不同的分区中：\n轮询分区策略 随机分区策略 按key分区分配策略 自定义分区策略 业务场景：消费论坛帖子评论\n采用自定义分区策略，因为每个评论操作请求中都携带有一个原始帖子ID字段，所以分发策略也很简单，直接帖子ID % 分片数将消息进行分发，这样同一个帖子ID的评论操作就都可以到同一个分片中，这样顺序的问题就解决了。\n",
+  "wordCount" : "120",
+  "inLanguage": "en",
+  "datePublished": "2022-12-26T21:31:04+08:00",
+  "dateModified": "2022-12-26T21:31:04+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://momobaba.xyz/post/kafka/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "莫小白的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://momobaba.xyz/%3Clink%20/%20abs%20url%3E"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://momobaba.xyz/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://momobaba.xyz/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.xyz/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.xyz/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.xyz/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/moxiaobai" title="Github">
+                    <span>Github</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://momobaba.xyz/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.xyz/post/">Posts</a></div>
+    <h1 class="post-title">
+      Kafka介绍以及常见问题总结
+    </h1>
+    <div class="post-meta"><span title='2022-12-26 21:31:04 +0800 CST'>December 26, 2022</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#kafka%e4%bb%8b%e7%bb%8d" aria-label="Kafka介绍">Kafka介绍</a></li>
+                <li>
+                    <a href="#kafka-%e5%a6%82%e4%bd%95%e4%bf%9d%e8%af%81%e6%b6%88%e6%81%af%e4%b8%8d%e4%b8%a2%e5%a4%b1" aria-label="Kafka 如何保证消息不丢失">Kafka 如何保证消息不丢失</a><ul>
+                        
+                <li>
+                    <a href="#%e7%94%9f%e4%ba%a7%e8%80%85%e4%b8%a2%e5%a4%b1%e6%b6%88%e6%81%af%e7%9a%84%e6%83%85%e5%86%b5" aria-label="生产者丢失消息的情况">生产者丢失消息的情况</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5" aria-label="最佳实践">最佳实践</a></li>
+                <li>
+                    <a href="#%e6%b6%88%e8%b4%b9%e8%80%85%e4%b8%a2%e5%a4%b1%e6%b6%88%e6%81%af%e7%9a%84%e6%83%85%e5%86%b5" aria-label="消费者丢失消息的情况">消费者丢失消息的情况</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5-1" aria-label="最佳实践">最佳实践</a></li></ul>
+                </li>
+                <li>
+                    <a href="#kafka-%e5%a6%82%e4%bd%95%e4%bf%9d%e8%af%81%e6%b6%88%e6%81%af%e4%b8%8d%e9%87%8d%e5%a4%8d%e6%b6%88%e8%b4%b9" aria-label="Kafka 如何保证消息不重复消费">Kafka 如何保证消息不重复消费</a><ul>
+                        
+                <li>
+                    <a href="#kafka%e5%87%ba%e7%8e%b0%e6%b6%88%e6%81%af%e9%87%8d%e5%a4%8d%e6%b6%88%e8%b4%b9%e7%9a%84%e5%8e%9f%e5%9b%a0" aria-label="kafka出现消息重复消费的原因">kafka出现消息重复消费的原因</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5-2" aria-label="最佳实践">最佳实践</a></li></ul>
+                </li>
+                <li>
+                    <a href="#kafka%e6%b6%88%e8%b4%b9%e7%bb%84" aria-label="Kafka消费组">Kafka消费组</a><ul>
+                        
+                <li>
+                    <a href="#%e5%a6%82%e4%bd%95%e5%90%88%e7%90%86%e8%ae%be%e7%bd%ae%e6%b6%88%e8%b4%b9%e8%80%85%e6%95%b0%e9%87%8f" aria-label="如何合理设置消费者数量">如何合理设置消费者数量</a></li>
+                <li>
+                    <a href="#%e5%a6%82%e4%bd%95%e4%bf%9d%e8%af%81%e5%88%86%e5%8c%ba%e5%86%99%e5%85%a5%e9%a1%ba%e5%ba%8f" aria-label="如何保证分区写入顺序">如何保证分区写入顺序</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="kafka介绍">Kafka介绍<a hidden class="anchor" aria-hidden="true" href="#kafka介绍">#</a></h2>
+<p><img loading="lazy" src="/img/kafka-info.png" alt="kafka介绍"  />
+</p>
+<blockquote>
+<p>Kafka 比较重要的几个概念：</p>
+</blockquote>
+<ol>
+<li>Producer（生产者） : 产生消息的一方。</li>
+<li>Consumer（消费者） : 消费消息的一方。</li>
+<li>Broker（代理） : 可以看作是一个独立的 Kafka 实例。多个 Kafka Broker 组成一个 Kafka Cluster。每个 Broker 中又包含了 Topic 以及 Partition</li>
+<li>Topic（主题） : Producer 将消息发送到特定的主题，Consumer 通过订阅特定的 Topic(主题) 来消费消息。</li>
+<li>Partition（分区） : Partition 属于 Topic 的一部分。一个 Topic 可以有多个 Partition ，并且同一 Topic 下的 Partition 可以分布在不同的 Broker 上，这也就表明一个 Topic 可以横跨多个 Broker</li>
+</ol>
+<h2 id="kafka-如何保证消息不丢失">Kafka 如何保证消息不丢失<a hidden class="anchor" aria-hidden="true" href="#kafka-如何保证消息不丢失">#</a></h2>
+<h3 id="生产者丢失消息的情况">生产者丢失消息的情况<a hidden class="anchor" aria-hidden="true" href="#生产者丢失消息的情况">#</a></h3>
+<blockquote>
+<p>生产者(Producer) 调用send方法发送消息之后，消息可能因为网络问题并没有发送过去</p>
+</blockquote>
+<h3 id="最佳实践">最佳实践<a hidden class="anchor" aria-hidden="true" href="#最佳实践">#</a></h3>
+<ol>
+<li>使用 producer.send(msg, callback)。带有回调通知的 send 方法可以针对发送失败的消息进行重试处理</li>
+<li>设置 acks = all，如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交”</li>
+<li>设置 retries = 3，当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失</li>
+<li>设置 retry.backoff.ms = 300，合理估算重试的时间间隔，可以避免无效的频繁重试</li>
+</ol>
+<h3 id="消费者丢失消息的情况">消费者丢失消息的情况<a hidden class="anchor" aria-hidden="true" href="#消费者丢失消息的情况">#</a></h3>
+<ol>
+<li>处理消息异常导致失败，并且提交了偏移量</li>
+</ol>
+<h3 id="最佳实践-1">最佳实践<a hidden class="anchor" aria-hidden="true" href="#最佳实践-1">#</a></h3>
+<ol>
+<li>确保消息消费完成再提交，设置成 enable.auto.commit = false，并采用手动提交位移的方式</li>
+</ol>
+<h2 id="kafka-如何保证消息不重复消费">Kafka 如何保证消息不重复消费<a hidden class="anchor" aria-hidden="true" href="#kafka-如何保证消息不重复消费">#</a></h2>
+<h3 id="kafka出现消息重复消费的原因">kafka出现消息重复消费的原因<a hidden class="anchor" aria-hidden="true" href="#kafka出现消息重复消费的原因">#</a></h3>
+<ol>
+<li>服务端侧已经消费的数据没有成功提交 offset</li>
+<li>Kafka 侧 由于服务端处理业务时间长或者网络链接等等原因让 Kafka 认为服务假死，触发了分区 rebalance</li>
+</ol>
+<h3 id="最佳实践-2">最佳实践<a hidden class="anchor" aria-hidden="true" href="#最佳实践-2">#</a></h3>
+<ol>
+<li>消费消息服务做幂等校验</li>
+</ol>
+<h2 id="kafka消费组">Kafka消费组<a hidden class="anchor" aria-hidden="true" href="#kafka消费组">#</a></h2>
+<blockquote>
+<p>为了提升Kafka消费者服务的性能，需要为Topic多分几个分区，然后试用消费者组(Consumer Group)去消费者topic</p>
+</blockquote>
+<h3 id="如何合理设置消费者数量">如何合理设置消费者数量<a hidden class="anchor" aria-hidden="true" href="#如何合理设置消费者数量">#</a></h3>
+<ol>
+<li>消费者数量太少，会导致一个消费者需要消费多个分区的数据，造成某一个消费者消费压力提升；</li>
+<li>消费者数量太多，会导致有的消费者并不会消费任何数据，浪费部署资源</li>
+<li>消费者组里的消费者数量与topic的分片数一致，这样可以保证每个消费者消费1个分区，达到最大效率协调</li>
+</ol>
+<p><img loading="lazy" src="/img/kafka-consumer.png" alt="kafka消费者组"  />
+</p>
+<h3 id="如何保证分区写入顺序">如何保证分区写入顺序<a hidden class="anchor" aria-hidden="true" href="#如何保证分区写入顺序">#</a></h3>
+<blockquote>
+<p>由于业务明确要求确保顺序消费，而kafka只是保证分片内的消费顺序是固定的，但是不同分片之间的消费顺序是无法保证的。</p>
+</blockquote>
+<p>生产者写入消息到kafka的topic时，kafka将依据不同的策略将数据分配到不同的分区中：</p>
+<ol>
+<li>轮询分区策略</li>
+<li>随机分区策略</li>
+<li>按key分区分配策略</li>
+<li>自定义分区策略</li>
+</ol>
+<blockquote>
+<p>业务场景：消费论坛帖子评论</p>
+</blockquote>
+<p>采用自定义分区策略，因为每个评论操作请求中都携带有一个原始帖子ID字段，所以分发策略也很简单，直接帖子ID % 分片数将消息进行分发，这样同一个帖子ID的评论操作就都可以到同一个分片中，这样顺序的问题就解决了。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://momobaba.xyz/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a></li>
+      <li><a href="https://momobaba.xyz/tags/kafka/">Kafka</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://momobaba.xyz/post/go-rabbitmq/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Go Rabbitmq 示例代码</span>
+  </a>
+</nav>
+
+  </footer>
+
+<script
+  src="https://utteranc.es/client.js"
+  repo="moxiaobai/moxiaobai.github.io"
+  issue-term="pathname"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://momobaba.xyz/">莫小白的博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
