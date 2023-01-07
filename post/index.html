@@ -183,6 +183,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>本地文本日志通过filebeat写入到ES
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat 上报到Kafka，最后把kafka数据消费写入到Elasticsearch。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-01-07 20:41:58 +0800 CST'>January 7, 2023</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to 本地文本日志通过filebeat写入到ES" href="https://momobaba.xyz/post/log-filebeat-kafka-es/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Go Kafka示例代码
     </h2>
   </header>
@@ -232,19 +245,6 @@ Producer（生产者） : 产生消息的一方。 Consumer（消费者） : 消
   </div>
   <footer class="entry-footer"><span title='2022-12-11 18:15:43 +0800 CST'>December 11, 2022</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to Etcd部署以及以及应用" href="https://momobaba.xyz/post/etcd/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Golang pprof性能分析
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>pprof 是 golang 官方提供的性能调优分析工具，可以对程序进行性能分析，并可视化数据，看起来相当的直观。 当你的 go 程序遇到性能瓶颈时，可以使用这个工具来进行调试并优化程序。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-11-27 21:28:51 +0800 CST'>November 27, 2022</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Golang pprof性能分析" href="https://momobaba.xyz/post/golang-pprof/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

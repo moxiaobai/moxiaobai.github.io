@@ -168,6 +168,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>本地文本日志通过filebeat写入到ES
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat 上报到Kafka，最后把kafka数据消费写入到Elasticsearch。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-01-07 20:41:58 +0800 CST'>January 7, 2023</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to 本地文本日志通过filebeat写入到ES" href="https://momobaba.xyz/post/log-filebeat-kafka-es/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Go Kafka示例代码
     </h2>
   </header>
@@ -217,19 +230,11 @@ if (!doNotTrack) {
   <footer class="entry-footer"><span title='2022-10-12 21:40:38 +0800 CST'>October 12, 2022</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to 如何防止Go Goroutine泄露" href="https://momobaba.xyz/post/go-goroutine-disclosure/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>使用Go Goroutine注意事项
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Go的协程使用起来很方便，但是有有些坑需要注意: 1. 使用goroutine时加上panic recovery机制，避免服务直接不可用 2. 不要创建都无法退出的goroutine，会导致goroutine 泄漏
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-09-25 17:18:02 +0800 CST'>September 25, 2022</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to 使用Go Goroutine注意事项" href="https://momobaba.xyz/post/go-goroutine/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://momobaba.xyz/categories/golang/page/2/">Next »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

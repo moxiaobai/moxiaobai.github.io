@@ -10,7 +10,17 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 02 Jan 2023 20:32:05 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Jan 2023 20:41:58 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>本地文本日志通过filebeat写入到ES</title>
+      <link>https://momobaba.xyz/post/log-filebeat-kafka-es/</link>
+      <pubDate>Sat, 07 Jan 2023 20:41:58 +0800</pubDate>
+      
+      <guid>https://momobaba.xyz/post/log-filebeat-kafka-es/</guid>
+      <description>&lt;p&gt;需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat
+上报到Kafka，最后把kafka数据消费写入到Elasticsearch。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Go Kafka示例代码</title>
       <link>https://momobaba.xyz/post/go-kafaka/</link>
