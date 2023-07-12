@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Kibana on 莫小白的博客</title>
-    <link>https://momobaba.xyz/tags/kibana/</link>
+    <link>https://momobaba.top/tags/kibana/</link>
     <description>Recent content in Kibana on 莫小白的博客</description>
     <image>
-      <url>https://momobaba.xyz/papermod-cover.png</url>
-      <link>https://momobaba.xyz/papermod-cover.png</link>
+      <url>https://momobaba.top/papermod-cover.png</url>
+      <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 07 Jan 2023 20:41:58 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/kibana/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Jan 2023 20:41:58 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/kibana/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>本地文本日志通过filebeat写入到ES</title>
-      <link>https://momobaba.xyz/post/log-filebeat-kafka-es/</link>
+      <link>https://momobaba.top/post/log-filebeat-kafka-es/</link>
       <pubDate>Sat, 07 Jan 2023 20:41:58 +0800</pubDate>
       
-      <guid>https://momobaba.xyz/post/log-filebeat-kafka-es/</guid>
+      <guid>https://momobaba.top/post/log-filebeat-kafka-es/</guid>
       <description>&lt;p&gt;需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat
 上报到Kafka，最后把kafka数据消费写入到Elasticsearch。&lt;/p&gt;</description>
     </item>

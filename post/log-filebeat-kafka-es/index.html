@@ -10,15 +10,15 @@
 <meta name="description" content="需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat
 上报到Kafka，最后把kafka数据消费写入到Elasticsearch。">
 <meta name="author" content="">
-<link rel="canonical" href="https://momobaba.xyz/post/log-filebeat-kafka-es/">
+<link rel="canonical" href="https://momobaba.top/post/log-filebeat-kafka-es/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
-<link rel="apple-touch-icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
-<link rel="mask-icon" href="https://momobaba.xyz/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -76,12 +76,12 @@ if (!doNotTrack) {
 <meta property="og:description" content="需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat
 上报到Kafka，最后把kafka数据消费写入到Elasticsearch。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://momobaba.xyz/post/log-filebeat-kafka-es/" /><meta property="og:image" content="https://momobaba.xyz/papermod-cover.png"/><meta property="article:section" content="post" />
+<meta property="og:url" content="https://momobaba.top/post/log-filebeat-kafka-es/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-01-07T20:41:58&#43;08:00" />
 <meta property="article:modified_time" content="2023-01-07T20:41:58&#43;08:00" /><meta property="og:site_name" content="ExampleSite" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://momobaba.xyz/papermod-cover.png"/>
+<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
 
 <meta name="twitter:title" content="本地文本日志通过filebeat写入到ES"/>
 <meta name="twitter:description" content="需求背景：在Kibana能够方便查询服务端程序记录的日志，考虑到公司技术栈多样性，有java、php、golang、python、lua等等。我们采用的方案是程序写本地日志，然后通过Filebeat
@@ -97,13 +97,13 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://momobaba.xyz/post/"
+      "item": "https://momobaba.top/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "本地文本日志通过filebeat写入到ES",
-      "item": "https://momobaba.xyz/post/log-filebeat-kafka-es/"
+      "item": "https://momobaba.top/post/log-filebeat-kafka-es/"
     }
   ]
 }
@@ -125,14 +125,14 @@ if (!doNotTrack) {
   "dateModified": "2023-01-07T20:41:58+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://momobaba.xyz/post/log-filebeat-kafka-es/"
+    "@id": "https://momobaba.top/post/log-filebeat-kafka-es/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "莫小白的博客",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://momobaba.xyz/%3Clink%20/%20abs%20url%3E"
+      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
     }
   }
 }
@@ -154,7 +154,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://momobaba.xyz/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -180,22 +180,22 @@ if (!doNotTrack) {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://momobaba.xyz/archives/" title="归档">
+                <a href="https://momobaba.top/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.xyz/search/" title="搜索">
+                <a href="https://momobaba.top/search/" title="搜索">
                     <span>搜索</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.xyz/categories/" title="分类">
+                <a href="https://momobaba.top/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.xyz/tags/" title="标签">
+                <a href="https://momobaba.top/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -211,7 +211,7 @@ if (!doNotTrack) {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://momobaba.xyz/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.xyz/post/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
     <h1 class="post-title">
       本地文本日志通过filebeat写入到ES
     </h1>
@@ -716,13 +716,13 @@ if (!doNotTrack) {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://momobaba.xyz/tags/filebeat/">Filebeat</a></li>
-      <li><a href="https://momobaba.xyz/tags/kafka/">Kafka</a></li>
-      <li><a href="https://momobaba.xyz/tags/elasticsearch/">Elasticsearch</a></li>
-      <li><a href="https://momobaba.xyz/tags/kibana/">Kibana</a></li>
+      <li><a href="https://momobaba.top/tags/filebeat/">Filebeat</a></li>
+      <li><a href="https://momobaba.top/tags/kafka/">Kafka</a></li>
+      <li><a href="https://momobaba.top/tags/elasticsearch/">Elasticsearch</a></li>
+      <li><a href="https://momobaba.top/tags/kibana/">Kibana</a></li>
     </ul>
 <nav class="paginav">
-  <a class="next" href="https://momobaba.xyz/post/go-kafaka/">
+  <a class="next" href="https://momobaba.top/post/go-kafaka/">
     <span class="title">Next »</span>
     <br>
     <span>Go Kafka示例代码</span>
@@ -743,7 +743,7 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://momobaba.xyz/">莫小白的博客</a></span>
+    <span>&copy; 2023 <a href="https://momobaba.top/">莫小白的博客</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

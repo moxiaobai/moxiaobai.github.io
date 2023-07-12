@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Nginx on 莫小白的博客</title>
-    <link>https://momobaba.xyz/tags/nginx/</link>
+    <link>https://momobaba.top/tags/nginx/</link>
     <description>Recent content in Nginx on 莫小白的博客</description>
     <image>
-      <url>https://momobaba.xyz/papermod-cover.png</url>
-      <link>https://momobaba.xyz/papermod-cover.png</link>
+      <url>https://momobaba.top/papermod-cover.png</url>
+      <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 08 Nov 2022 09:05:52 +0800</lastBuildDate><atom:link href="https://momobaba.xyz/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Nov 2022 09:05:52 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx限制国家访问</title>
-      <link>https://momobaba.xyz/post/nginx-restricts-country-access/</link>
+      <link>https://momobaba.top/post/nginx-restricts-country-access/</link>
       <pubDate>Tue, 08 Nov 2022 09:05:52 +0800</pubDate>
       
-      <guid>https://momobaba.xyz/post/nginx-restricts-country-access/</guid>
+      <guid>https://momobaba.top/post/nginx-restricts-country-access/</guid>
       <description>&lt;p&gt;限制某个国家访问或者只允许某个国家访问我们的服务，有两种做法，一种是在Ningx里面限制，一种是在程序里面限制；程序里面下载GeoLite2-Country.mmdb库，实现很简单。今天主要讲
 nginx中如何实现&lt;/p&gt;</description>
     </item>
