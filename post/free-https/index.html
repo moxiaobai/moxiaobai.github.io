@@ -115,7 +115,7 @@ if (!doNotTrack) {
   "keywords": [
     "Linux", "Https"
   ],
-  "articleBody": "使用Let’s Encrypt配置免费证书\n安装snapd 1 2 3 yum install snapd systemctl enable --now snapd.socket ln -s /var/lib/snapd/snap /snap 安装certbot 1 2 snap install --classic certbot ln -s /snap/bin/certbot /usr/bin/certbot 生成证书 证书生成目录/etc/letsencrypt/live/\n1 2 3 #设置软连 ln -s /usr/local/nginx/conf /etc/nginx certbot certonly --nginx 证书续订 1 2 #测试续订是否正常执行 certbot renew --dry-run 1 2 #计划任务 0 0,12 * * * certbot renew Nginx配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 server { listen 80; server_name upwork.momobaba.xyz; root /home/www/upwork; index index.html index.php; include enable-php.conf; } server { listen 443 ssl; server_name demo.momobaba.xyz; root /home/www/demo; ssl_certificate /etc/letsencrypt/live/demo.momobaba.xyz/fullchain.pem; ssl_certificate_key /etc/letsencrypt/live/demo.momobaba.xyz/privkey.pem; ssl_session_timeout 5m; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP; ssl_prefer_server_ciphers on; index index.html index.php; include enable-php.conf; } ",
+  "articleBody": "使用Let’s Encrypt配置免费证书\n安装snapd 1 2 3 yum install snapd systemctl enable --now snapd.socket ln -s /var/lib/snapd/snap /snap 安装certbot 1 2 snap install --classic certbot ln -s /snap/bin/certbot /usr/bin/certbot 生成证书 证书生成目录/etc/letsencrypt/live/\n1 2 3 #设置软连 ln -s /usr/local/nginx/conf /etc/nginx certbot certonly --nginx 证书续订 1 2 #测试续订是否正常执行 certbot renew --dry-run 1 2 #计划任务 0 0,12 * * * certbot renew Nginx配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 server { listen 80; server_name upwork.momobaba.top; root /home/www/upwork; index index.html index.php; include enable-php.conf; } server { listen 443 ssl; server_name demo.momobaba.top; root /home/www/demo; ssl_certificate /etc/letsencrypt/live/demo.momobaba.top/fullchain.pem; ssl_certificate_key /etc/letsencrypt/live/demo.momobaba.top/privkey.pem; ssl_session_timeout 5m; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP; ssl_prefer_server_ciphers on; index index.html index.php; include enable-php.conf; } ",
   "wordCount" : "127",
   "inLanguage": "en",
   "datePublished": "2022-10-23T16:25:03+08:00",
@@ -332,7 +332,7 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">server
 </span></span><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
-</span></span><span class="line"><span class="cl">    server_name upwork.momobaba.xyz<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name upwork.momobaba.top<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    root   /home/www/upwork<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    index  index.html index.php<span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -342,10 +342,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">server
 </span></span><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    listen       <span class="m">443</span> ssl<span class="p">;</span>
-</span></span><span class="line"><span class="cl">    server_name demo.momobaba.xyz<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name demo.momobaba.top<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    root  /home/www/demo<span class="p">;</span>
-</span></span><span class="line"><span class="cl">    ssl_certificate     /etc/letsencrypt/live/demo.momobaba.xyz/fullchain.pem<span class="p">;</span>
-</span></span><span class="line"><span class="cl">    ssl_certificate_key /etc/letsencrypt/live/demo.momobaba.xyz/privkey.pem<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate     /etc/letsencrypt/live/demo.momobaba.top/fullchain.pem<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate_key /etc/letsencrypt/live/demo.momobaba.top/privkey.pem<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    ssl_session_timeout 5m<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class="p">;</span>

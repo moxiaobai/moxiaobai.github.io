@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | 莫小白的博客</title>
+<title>Gitlab | 莫小白的博客</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - 莫小白的博客">
+<meta name="description" content="ExampleSite description">
 <meta name="author" content="">
-<link rel="canonical" href="https://momobaba.top/post/">
+<link rel="canonical" href="https://momobaba.top/tags/gitlab/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://momobaba.top/post/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://momobaba.top/tags/gitlab/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,32 +70,17 @@ if (!doNotTrack) {
 	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
 }
 </script>
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="Gitlab" />
 <meta property="og:description" content="ExampleSite description" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://momobaba.top/post/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="og:site_name" content="ExampleSite" />
+<meta property="og:url" content="https://momobaba.top/tags/gitlab/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="og:site_name" content="ExampleSite" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
 
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="Gitlab"/>
 <meta name="twitter:description" content="ExampleSite description"/>
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://momobaba.top/post/"
-    }
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -167,9 +152,9 @@ if (!doNotTrack) {
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://momobaba.top/">Home</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/tags/">Tags</a></div>
   <h1>
-    Posts
+    Gitlab
     <a href="index.xml" title="RSS" aria-label="RSS">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" height="23">
@@ -181,64 +166,18 @@ if (!doNotTrack) {
   </h1>
 </header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>如何防止Go Goroutine泄露
+    <h2>Gitlab Devops CICD
     </h2>
   </header>
   <div class="entry-content">
-    <p>Go的并发模型虽简化了并发程序的开发难度，但如果不了解使用方法，常常会遇到goroutine泄露的问题。我们可以可以从两方面入手解决，一是预防（了解什么样的代码会产生泄露），二是监控（通过Prometheus采集metrics来监控）
+    <p>GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-10-12 21:40:38 +0800 CST'>October 12, 2022</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to 如何防止Go Goroutine泄露" href="https://momobaba.top/post/go-goroutine-disclosure/"></a>
+  <footer class="entry-footer"><span title='2023-07-13 18:40:32 +0800 CST'>July 13, 2023</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to Gitlab Devops CICD" href="https://momobaba.top/post/gitlab-devops-cicd/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Prometheus&#43;Grafana监控PHP-FPM
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>为什么要监控php-fpm的状态？ 因为php-fpm多进程模型，线上一般都是static静态进程数配置，很容易因为I/O慢导致进程全部占满，造成拒绝服务。通过Prometheus采集PHP-FPM的性能指标来监控PHP-FPM
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-10-09 20:29:27 +0800 CST'>October 9, 2022</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Prometheus&#43;Grafana监控PHP-FPM" href="https://momobaba.top/post/php-fpm-monitor/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>使用Go Goroutine注意事项
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Go的协程使用起来很方便，但是有有些坑需要注意: 1. 使用goroutine时加上panic recovery机制，避免服务直接不可用 2. 不要创建都无法退出的goroutine，会导致goroutine 泄漏
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-09-25 17:18:02 +0800 CST'>September 25, 2022</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to 使用Go Goroutine注意事项" href="https://momobaba.top/post/go-goroutine/"></a>
-</article>
-
-<article class="post-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="https://momobaba.top/img/780.jpg" alt="#">
-</figure>
-  <header class="entry-header">
-    <h2>Restful API示例文档
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Restful API示例文档
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-09-15 11:30:03 +0000 +0000'>September 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;240 words</footer>
-  <a class="entry-link" aria-label="post link to Restful API示例文档" href="https://momobaba.top/post/my-first-post/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="https://momobaba.top/post/page/2/">« Prev</a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">
