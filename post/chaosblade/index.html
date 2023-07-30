@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ChaosBlade故障模拟 | 莫小白的博客</title>
+<meta name="keywords" content="故障模拟">
+<meta name="description" content="线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。
+比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；">
+<meta name="author" content="">
+<link rel="canonical" href="https://momobaba.top/post/chaosblade/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
+/>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="ChaosBlade故障模拟" />
+<meta property="og:description" content="线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。
+比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://momobaba.top/post/chaosblade/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-30T19:47:43&#43;08:00" />
+<meta property="article:modified_time" content="2023-07-30T19:47:43&#43;08:00" /><meta property="og:site_name" content="ExampleSite" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
+
+<meta name="twitter:title" content="ChaosBlade故障模拟"/>
+<meta name="twitter:description" content="线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。
+比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://momobaba.top/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ChaosBlade故障模拟",
+      "item": "https://momobaba.top/post/chaosblade/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ChaosBlade故障模拟",
+  "name": "ChaosBlade故障模拟",
+  "description": "线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。 比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；\n",
+  "keywords": [
+    "故障模拟"
+  ],
+  "articleBody": "线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。 比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；\n安装chaosblade-box web可视化平台 官方文档： https://chaosblade.io/docs/\n安装ansible和expect 1 yum install ansible expect -y Github下载chaosblade-box 1 wget https://chaosblade.oss-cn-hangzhou.aliyuncs.com/platform/release/1.0.3/chaosblade-box-1.0.3.jar 有依赖mysql，需要自行安装\n1 2 #启动服务 nohup java -Duser.timezone=Asia/Shanghai -jar chaosblade-box-1.0.3.jar --spring.datasource.url=\"jdbc:mysql://127.0.0.1:3306/chaosblade?characterEncoding=utf8\u0026useSSL=false\" --spring.datasource.username=root --spring.datasource.password=123456 --chaos.function.sync.type=ALL --chaos.server.domain=0.0.0.0:7001 \u003e /data/logs/chaosblade-box.log 2\u003e\u00261 \u0026 chaos.function.sync.type=ALL 开启演练场景\n启动成功后在浏览器访问：http://192.168.6.1:7001 ， 账号需要先注册\n安装探针 1 wget https://chaosblade.oss-cn-hangzhou.aliyuncs.com/platform/release/1.0.2/chaosagent.tar.gz -O chaos.tar.gz \u0026\u0026 tar -zxvf chaos.tar.gz -C /opt/ \u0026\u0026 sudo sh /opt/chaos/chaosctl.sh install -k c1c154d19d674831b4b1ebb2620ea8b9 -p pay -g support -P 9002 -t 192.168.6.1:7001 安装完成后可以看到主机 网络丢包 新建演练 配置演练参数 开始演练 我们可以在服务器验证是否成功\n1 telnet 10.0.0.46 3306 ",
+  "wordCount" : "77",
+  "inLanguage": "en",
+  "datePublished": "2023-07-30T19:47:43+08:00",
+  "dateModified": "2023-07-30T19:47:43+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://momobaba.top/post/chaosblade/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "莫小白的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://momobaba.top/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/moxiaobai" title="Github">
+                    <span>Github</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
+    <h1 class="post-title">
+      ChaosBlade故障模拟
+    </h1>
+    <div class="post-meta"><span title='2023-07-30 19:47:43 +0800 CST'>July 30, 2023</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85chaosblade-box-web%e5%8f%af%e8%a7%86%e5%8c%96%e5%b9%b3%e5%8f%b0" aria-label="安装chaosblade-box web可视化平台">安装chaosblade-box web可视化平台</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85ansible%e5%92%8cexpect" aria-label="安装ansible和expect">安装ansible和expect</a></li>
+                <li>
+                    <a href="#github%e4%b8%8b%e8%bd%bdchaosblade-box" aria-label="Github下载chaosblade-box">Github下载chaosblade-box</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85%e6%8e%a2%e9%92%88" aria-label="安装探针">安装探针</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%bd%91%e7%bb%9c%e4%b8%a2%e5%8c%85" aria-label="网络丢包">网络丢包</a><ul>
+                        
+                <li>
+                    <a href="#%e6%96%b0%e5%bb%ba%e6%bc%94%e7%bb%83" aria-label="新建演练">新建演练</a></li>
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%ae%e6%bc%94%e7%bb%83%e5%8f%82%e6%95%b0" aria-label="配置演练参数">配置演练参数</a></li>
+                <li>
+                    <a href="#%e5%bc%80%e5%a7%8b%e6%bc%94%e7%bb%83" aria-label="开始演练">开始演练</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。
+比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；</p>
+<hr>
+<h2 id="安装chaosblade-box-web可视化平台">安装chaosblade-box web可视化平台<a hidden class="anchor" aria-hidden="true" href="#安装chaosblade-box-web可视化平台">#</a></h2>
+<blockquote>
+<p>官方文档： <a href="https://chaosblade.io/docs/">https://chaosblade.io/docs/</a></p>
+</blockquote>
+<h3 id="安装ansible和expect">安装ansible和expect<a hidden class="anchor" aria-hidden="true" href="#安装ansible和expect">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">yum install ansible expect -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="github下载chaosblade-box">Github下载chaosblade-box<a hidden class="anchor" aria-hidden="true" href="#github下载chaosblade-box">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">wget</span> <span class="err">https:</span><span class="c1">//chaosblade.oss-cn-hangzhou.aliyuncs.com/platform/release/1.0.3/chaosblade-box-1.0.3.jar
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>有依赖mysql，需要自行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">#启动服务
+</span></span><span class="line"><span class="cl">nohup java -Duser.timezone=Asia/Shanghai -jar chaosblade-box-1.0.3.jar --spring.datasource.url=&#34;jdbc:mysql://127.0.0.1:3306/chaosblade?characterEncoding=utf8&amp;useSSL=false&#34; --spring.datasource.username=root --spring.datasource.password=123456  --chaos.function.sync.type=ALL --chaos.server.domain=0.0.0.0:7001 &gt; /data/logs/chaosblade-box.log 2&gt;&amp;1 &amp;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>chaos.function.sync.type=ALL  开启演练场景</p>
+<p>启动成功后在浏览器访问：<a href="http://192.168.6.1:7001/">http://192.168.6.1:7001</a> ， 账号需要先注册</p>
+<h2 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h2>
+<h3 id="安装探针">安装探针<a hidden class="anchor" aria-hidden="true" href="#安装探针">#</a></h3>
+<p><img loading="lazy" src="/img/chaos_control.png" alt="安装探针"  />
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">wget</span> <span class="err">https:</span><span class="c1">//chaosblade.oss-cn-hangzhou.aliyuncs.com/platform/release/1.0.2/chaosagent.tar.gz -O chaos.tar.gz &amp;&amp; tar -zxvf chaos.tar.gz -C /opt/ &amp;&amp; sudo sh /opt/chaos/chaosctl.sh install -k c1c154d19d674831b4b1ebb2620ea8b9 -p  pay  -g support  -P 9002  -t 192.168.6.1:7001
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后可以看到主机
+<img loading="lazy" src="/img/chaos_robot.png" alt="演练主机"  />
+</p>
+<h2 id="网络丢包">网络丢包<a hidden class="anchor" aria-hidden="true" href="#网络丢包">#</a></h2>
+<h3 id="新建演练">新建演练<a hidden class="anchor" aria-hidden="true" href="#新建演练">#</a></h3>
+<p><img loading="lazy" src="/img/chaos_experiment.png" alt="新建演练"  />
+</p>
+<h3 id="配置演练参数">配置演练参数<a hidden class="anchor" aria-hidden="true" href="#配置演练参数">#</a></h3>
+<p><img loading="lazy" src="/img/chaos_params.png" alt="配置演练参数"  />
+</p>
+<h3 id="开始演练">开始演练<a hidden class="anchor" aria-hidden="true" href="#开始演练">#</a></h3>
+<p><img loading="lazy" src="/img/chaos_task.png" alt="配置演练参数"  />
+</p>
+<p>我们可以在服务器验证是否成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">telnet</span> <span class="mf">10.0</span><span class="err">.</span><span class="mf">0.46</span> <span class="mi">3306</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/">故障模拟</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://momobaba.top/post/gitlab-devops-cicd/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Gitlab Devops CICD</span>
+  </a>
+</nav>
+
+  </footer>
+
+<script
+  src="https://utteranc.es/client.js"
+  repo="moxiaobai/moxiaobai.github.io"
+  issue-term="pathname"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://momobaba.top/">莫小白的博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
