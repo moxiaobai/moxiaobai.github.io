@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>PHP on 莫小白的博客</title>
+    <title>PHP on 莫小白的技术博客</title>
     <link>https://momobaba.top/tags/php/</link>
-    <description>Recent content in PHP on 莫小白的博客</description>
+    <description>Recent content in PHP on 莫小白的技术博客</description>
     <image>
       <url>https://momobaba.top/papermod-cover.png</url>
       <link>https://momobaba.top/papermod-cover.png</link>

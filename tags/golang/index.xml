@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Golang on 莫小白的博客</title>
+    <title>Golang on 莫小白的技术博客</title>
     <link>https://momobaba.top/tags/golang/</link>
-    <description>Recent content in Golang on 莫小白的博客</description>
+    <description>Recent content in Golang on 莫小白的技术博客</description>
     <image>
       <url>https://momobaba.top/papermod-cover.png</url>
       <link>https://momobaba.top/papermod-cover.png</link>
@@ -18,7 +18,7 @@
       
       <guid>https://momobaba.top/post/go-kafaka/</guid>
       <description>&lt;hr&gt;
-&lt;p&gt;Go Kafka 示例代码, 使用&lt;a href=&#34;https://github.com/segmentio/kafka-go&#34;&gt;github.com/streadway/amqp&lt;/a&gt;库, 包含生产和消费示例代码&lt;/p&gt;</description>
+&lt;p&gt;Go Kafka 示例代码, 使用&lt;a href=&#34;https://github.com/segmentio/kafka-go&#34; target=&#34;_blank&#34;&gt;github.com/streadway/amqp&lt;/a&gt;库, 包含生产和消费示例代码&lt;/p&gt;</description>
     </item>
     
     <item>

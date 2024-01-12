@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>莫小白的博客</title>
+    <title>莫小白的技术博客</title>
     <link>https://momobaba.top/</link>
-    <description>Recent content on 莫小白的博客</description>
+    <description>Recent content on 莫小白的技术博客</description>
     <image>
       <url>https://momobaba.top/papermod-cover.png</url>
       <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 30 Jul 2023 19:47:43 +0800</lastBuildDate><atom:link href="https://momobaba.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Dec 2023 20:59:57 +0800</lastBuildDate><atom:link href="https://momobaba.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端Nextjs和Nuxtjs框架学习</title>
+      <link>https://momobaba.top/post/nextjs-nuxtjs/</link>
+      <pubDate>Tue, 12 Dec 2023 20:59:57 +0800</pubDate>
+      
+      <guid>https://momobaba.top/post/nextjs-nuxtjs/</guid>
+      <description>&lt;p&gt;最近花了一个月时间学习了前端Vue和React，Vue用的nuxtjs框架，React用的nextjs框架；做了一个简单的商城，包含谷歌登录和支付功能，支付对接了paypal和stripe。
+掌握一门语言或者框架，最快的方式还是实战。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>ChaosBlade故障模拟</title>
       <link>https://momobaba.top/post/chaosblade/</link>
@@ -47,7 +57,7 @@
       
       <guid>https://momobaba.top/post/go-kafaka/</guid>
       <description>&lt;hr&gt;
-&lt;p&gt;Go Kafka 示例代码, 使用&lt;a href=&#34;https://github.com/segmentio/kafka-go&#34;&gt;github.com/streadway/amqp&lt;/a&gt;库, 包含生产和消费示例代码&lt;/p&gt;</description>
+&lt;p&gt;Go Kafka 示例代码, 使用&lt;a href=&#34;https://github.com/segmentio/kafka-go&#34; target=&#34;_blank&#34;&gt;github.com/streadway/amqp&lt;/a&gt;库, 包含生产和消费示例代码&lt;/p&gt;</description>
     </item>
     
     <item>

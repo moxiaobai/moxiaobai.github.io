@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on 莫小白的博客</title>
+    <title>Tags on 莫小白的技术博客</title>
     <link>https://momobaba.top/tags/</link>
-    <description>Recent content in Tags on 莫小白的博客</description>
+    <description>Recent content in Tags on 莫小白的技术博客</description>
     <image>
       <url>https://momobaba.top/papermod-cover.png</url>
       <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 30 Jul 2023 19:47:43 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Dec 2023 20:59:57 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs</title>
+      <link>https://momobaba.top/tags/nextjs/</link>
+      <pubDate>Tue, 12 Dec 2023 20:59:57 +0800</pubDate>
+      
+      <guid>https://momobaba.top/tags/nextjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nuxtjs</title>
+      <link>https://momobaba.top/tags/nuxtjs/</link>
+      <pubDate>Tue, 12 Dec 2023 20:59:57 +0800</pubDate>
+      
+      <guid>https://momobaba.top/tags/nuxtjs/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>故障模拟</title>
       <link>https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</link>
