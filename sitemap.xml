@@ -3,18 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://momobaba.top/categories/</loc>
-    <lastmod>2023-12-12T20:59:57+08:00</lastmod>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/tags/diffy/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/tags/golang/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/tags/goreplay/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/post/goreplay/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/post/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/tags/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/categories/%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://momobaba.top/</loc>
+    <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/tags/nextjs/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/tags/nuxtjs/</loc>
-    <lastmod>2023-12-12T20:59:57+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.top/post/</loc>
-    <lastmod>2023-12-12T20:59:57+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.top/tags/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/categories/%E5%89%8D%E7%AB%AF/</loc>
@@ -23,16 +41,10 @@
     <loc>https://momobaba.top/post/nextjs-nuxtjs/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/</loc>
-    <lastmod>2023-12-12T20:59:57+08:00</lastmod>
-  </url><url>
     <loc>https://momobaba.top/post/chaosblade/</loc>
     <lastmod>2023-07-30T19:47:43+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</loc>
-    <lastmod>2023-07-30T19:47:43+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.top/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2023-07-30T19:47:43+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/tags/devops/</loc>
@@ -66,9 +78,6 @@
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/post/go-kafaka/</loc>
-    <lastmod>2023-01-02T20:32:05+08:00</lastmod>
-  </url><url>
-    <loc>https://momobaba.top/tags/golang/</loc>
     <lastmod>2023-01-02T20:32:05+08:00</lastmod>
   </url><url>
     <loc>https://momobaba.top/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>

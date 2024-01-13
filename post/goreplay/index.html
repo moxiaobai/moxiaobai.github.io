@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Goreplay流量录制和回放 | 莫小白的技术博客</title>
+<meta name="keywords" content="Golang, Goreplay, Diffy">
+<meta name="description" content="日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay &#43; Diffy开源工具。">
+<meta name="author" content="">
+<link rel="canonical" href="https://momobaba.top/post/goreplay/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
+/>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Goreplay流量录制和回放" />
+<meta property="og:description" content="日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay &#43; Diffy开源工具。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://momobaba.top/post/goreplay/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-12T22:00:36&#43;08:00" />
+<meta property="article:modified_time" content="2024-01-12T22:00:36&#43;08:00" /><meta property="og:site_name" content="莫小白的技术博客" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Goreplay流量录制和回放"/>
+<meta name="twitter:description" content="日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay &#43; Diffy开源工具。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://momobaba.top/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Goreplay流量录制和回放",
+      "item": "https://momobaba.top/post/goreplay/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Goreplay流量录制和回放",
+  "name": "Goreplay流量录制和回放",
+  "description": "日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay + Diffy开源工具。\n",
+  "keywords": [
+    "Golang", "Goreplay", "Diffy"
+  ],
+  "articleBody": "日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay + Diffy开源工具。\nGoReplay介绍 GoReplay 主要用于流量录制和回放\n工作流程图 Diffy工具介绍 Diffy 是一个开源的自动化测试工具，主要基于稳定版本和它的副本的输出，对候选版本的输出进行比较，以检查候选版本是否正确。\n工作原理 通过向稳定版本和稳定版本副本回放流量，对比其流量差异得到噪音 通过向候选版本和稳定版本回放流量，对比其流量差异得到原始区别 再从原始区别剔除噪音得到最终的diff结果 Diffy工作流程图 GoReplay+Diffy工作流程图 Goreplay使用教程 项目地址:https://github.com/buger/goreplay\n安装 二进制文件安装 下载二进制文件\n1 2 3 4 5 6 tar -zxvf gor_1.3.3_x64.tar.gz mv gor /usr/local/bin/ type gor #root用户执行，让www用户可以使用 setcap \"cap_net_raw,cap_net_admin+eip\" gor 编译安装\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 #安装依赖 yum install flex bison -y wget http://www.tcpdump.org/release/libpcap-1.7.4.tar.gz \u0026\u0026 tar xzf libpcap-1.7.4.tar.gz cd libpcap-1.7.4 ./configure \u0026\u0026 make install #源码编译 git clone https://github.com/buger/goreplay.git cd goreplay go mod tidy go mod vendor #需要开启CGO，否则无法编译 CGO_ENABLED=1 go build -o ./bin/gor ./cmd/gor/ 参数说明 Gor可用输入 参数 说明 示例 -input-raw 用于捕获HTTP流量，需要指定IP地址或端口 gor –input-raw :8000 -input-raw-track-response 默认关闭，开启后会捕获响应数据， 如果响应数据Content-Type：text/html; charset=UTF-8 并且Content-Encoding: gzip响应数据会乱码，需要加上prettify-http参数 gor –input-raw :8000–input-raw-track-response –prettify-http -input-file 捕获流量保存的文件 gor –input-file demo.gor –input-tcp 如果您决定将来自多个转发器Gor实例的流量转发给它，则由Gor聚合实例使用 gor –input-tcp :8000–output-http “http://test1.com” –output-http “http://test2.com” –input-file-loop 实现无限重播 Gor可用输出 参数 说明 示例 –output-http 重放HTTP流量到给定的端点 gor –input-file 20240112.gor –output-http=“http://127.0.0.1:8003” –output-file 记录传入的流量到文件 gor –input-raw :8000 –output-file %Y%m%d.gor –output-file-append 记录文件以追加的模式 gor –input-raw :8000 –output-file %Y%m%d.gor –output-file-append –output-stdout 用于调试，输出所有数据到stdout gor –input-raw :8000 –output-stdout 请求过滤（gor支持基于url、HTTP头、HTTP方法进行过滤） 参数 说明 示例 –http-allow-url 允许URL正则表达式 gor –input-raw :8000–http-allow-url ‘/api’ –http-disallow-url 禁止URL正则表达式 gor –input-raw :8000–http-disallow-url ‘/api’ –http-allow-header 基于HTTP头的正则表达式筛选 gor –input-raw :8000–output-http staging.com –http-allow-header api-version:^1.0\\d –http-allow-method 基于HTTP方法过滤 gor –input-file “20240105.gor” –http-allow-method POST –http-allow-host 允许host gor –input-file “20240105.gor” –http-allow-host webstore.menaapp.net 请求重写（gor支持重写URL、URL参数、HTTP头） 参数 说明 示例 –http-set-header 设置消息头，如果HTTP头已经存在，它将被覆盖 gor –input-file “20240105.gor” –http-allow-url ‘/api/store/goods’ –http-set-header ‘Content-Type:application/json’ –output-http=“http://127.0.0.1:8880” –http-set-param 设置请求url参数，如果参数已经存在，它将被覆盖 gor –input-raw :8000–output-http staging.com –http-set-param api_key=1 –http-rewrite-url 根据映射重写URL gor –input-raw :8000–output-http staging.com –http-rewrite-url /v1/user/([^\\/]+)/ping:/v2/user/$1/ping\" 演示示例 录制流量\n1 2 3 4 5 #监听80端口，会录制该机器上面所有域名请求流量 gor --input-raw :80 --output-file %Y%m%d.gor --output-file-append #只监听后端端口8080请求流量 gor --input-raw :8080 --output-file %Y%m%d.gor --output-file-append 回放流量\n1 2 3 #只允许POST请求，过滤OPTIONS请求，允许URL/api/ gor --input-file \"20240112.gor\" --http-allow-method POST --http-allow-url '/api/' --output-http=\"http://127.0.0.1:8000\" 其他问题 不能监听443端口数据，可以用以下方式解决\n通过反向代理方式监听后端端口，php项目通过Nginx再转一层； 线上用的阿里云负载均衡器，只需要监听80端口，就可以监听所有http和https请求 Diffy使用教程 项目地址:https://github.com/opendiffy/diffy\n安装部署Diffy 1 2 3 4 #下载Java 17二进制文件 wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm yum -y install ./jdk-17_linux-x64_bin.rpm java -version 参数说明 candidate 重构后新代码的网络地址 master.primary 旧代码的网络地址，用于为正确行为提供基线 master.secondary 用于检测噪音的旧代码的另一个实例的网络地址 proxy.port 此端口用于接收将转发到服务实例的请求 http.port 此端口用于为 UI 提供服务 allowHttpSideEffects 出于安全原因，默认情况下会忽略 POST、PUT、PATCH、DELETE。将参数添加到 –allowHttpSideEffects=true 命令行以启用 启动服务 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 java -jar ./diffy.jar \\ --candidate='127.0.0.1:8003' \\ --master.primary='127.0.0.1:8001' \\ --master.secondary='127.0.0.1:8002' \\ --responseMode='candidate' \\ --allowHttpSideEffects='true' \\ --service.protocol=http \\ --serviceName=My-Service \\ --proxy.port=8880 \\ --http.port=8888 #监听18000流量 gor --input-raw :8000 --output-http=\"http://127.0.0.1:8880\" #浏览器查看Diffy UI界面 http://127.0.0.1:8888 ",
+  "wordCount" : "345",
+  "inLanguage": "en",
+  "datePublished": "2024-01-12T22:00:36+08:00",
+  "dateModified": "2024-01-12T22:00:36+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://momobaba.top/post/goreplay/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "莫小白的技术博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://momobaba.top/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://momobaba.top/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/moxiaobai" title="Github">
+                    <span>Github</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
+    <h1 class="post-title">
+      Goreplay流量录制和回放
+    </h1>
+    <div class="post-meta"><span title='2024-01-12 22:00:36 +0800 CST'>January 12, 2024</span>&nbsp;·&nbsp;2 min
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#goreplay%e4%bb%8b%e7%bb%8d" aria-label="GoReplay介绍">GoReplay介绍</a><ul>
+                        
+                <li>
+                    <a href="#%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b%e5%9b%be" aria-label="工作流程图">工作流程图</a></li></ul>
+                </li>
+                <li>
+                    <a href="#diffy%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d" aria-label="Diffy工具介绍">Diffy工具介绍</a><ul>
+                        
+                <li>
+                    <a href="#%e5%b7%a5%e4%bd%9c%e5%8e%9f%e7%90%86" aria-label="工作原理">工作原理</a></li>
+                <li>
+                    <a href="#diffy%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b%e5%9b%be" aria-label="Diffy工作流程图">Diffy工作流程图</a></li>
+                <li>
+                    <a href="#goreplaydiffy%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b%e5%9b%be" aria-label="GoReplay&#43;Diffy工作流程图">GoReplay+Diffy工作流程图</a></li></ul>
+                </li>
+                <li>
+                    <a href="#goreplay%e4%bd%bf%e7%94%a8%e6%95%99%e7%a8%8b" aria-label="Goreplay使用教程">Goreplay使用教程</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85" aria-label="安装">安装</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e" aria-label="参数说明">参数说明</a><ul>
+                        
+                <li>
+                    <a href="#gor%e5%8f%af%e7%94%a8%e8%be%93%e5%85%a5" aria-label="Gor可用输入">Gor可用输入</a></li>
+                <li>
+                    <a href="#gor%e5%8f%af%e7%94%a8%e8%be%93%e5%87%ba" aria-label="Gor可用输出">Gor可用输出</a></li>
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e8%bf%87%e6%bb%a4gor%e6%94%af%e6%8c%81%e5%9f%ba%e4%ba%8eurlhttp%e5%a4%b4http%e6%96%b9%e6%b3%95%e8%bf%9b%e8%a1%8c%e8%bf%87%e6%bb%a4" aria-label="请求过滤（gor支持基于url、HTTP头、HTTP方法进行过滤）">请求过滤（gor支持基于url、HTTP头、HTTP方法进行过滤）</a></li>
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e9%87%8d%e5%86%99gor%e6%94%af%e6%8c%81%e9%87%8d%e5%86%99urlurl%e5%8f%82%e6%95%b0http%e5%a4%b4" aria-label="请求重写（gor支持重写URL、URL参数、HTTP头）">请求重写（gor支持重写URL、URL参数、HTTP头）</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%bc%94%e7%a4%ba%e7%a4%ba%e4%be%8b" aria-label="演示示例">演示示例</a></li>
+                <li>
+                    <a href="#%e5%85%b6%e4%bb%96%e9%97%ae%e9%a2%98" aria-label="其他问题">其他问题</a></li></ul>
+                </li>
+                <li>
+                    <a href="#diffy%e4%bd%bf%e7%94%a8%e6%95%99%e7%a8%8b" aria-label="Diffy使用教程">Diffy使用教程</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85%e9%83%a8%e7%bd%b2diffy" aria-label="安装部署Diffy">安装部署Diffy</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e-1" aria-label="参数说明">参数说明</a></li>
+                <li>
+                    <a href="#%e5%90%af%e5%8a%a8%e6%9c%8d%e5%8a%a1" aria-label="启动服务">启动服务</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>日常大部分的测试工作都是在测试环境下，通过模拟用户的行为来对系统进行验证，但是线下模拟场景有限，会出现业务覆盖不全的情况，通过把线上的真实流量复制到线下环境，解决测试环境模拟不够真实，或覆盖不够全面的问题。通过调研，决定用GoReplay + Diffy开源工具。</p>
+<h2 id="goreplay介绍">GoReplay介绍<a hidden class="anchor" aria-hidden="true" href="#goreplay介绍">#</a></h2>
+<blockquote>
+<p>GoReplay 主要用于流量录制和回放</p>
+</blockquote>
+<h3 id="工作流程图">工作流程图<a hidden class="anchor" aria-hidden="true" href="#工作流程图">#</a></h3>
+<p><img loading="lazy" src="/img/gor_flow.png" alt="Goreplay工作流程图"  />
+</p>
+<h2 id="diffy工具介绍">Diffy工具介绍<a hidden class="anchor" aria-hidden="true" href="#diffy工具介绍">#</a></h2>
+<blockquote>
+<p>Diffy 是一个开源的自动化测试工具，主要基于稳定版本和它的副本的输出，对候选版本的输出进行比较，以检查候选版本是否正确。</p>
+</blockquote>
+<h3 id="工作原理">工作原理<a hidden class="anchor" aria-hidden="true" href="#工作原理">#</a></h3>
+<ol>
+<li>通过向稳定版本和稳定版本副本回放流量，对比其流量差异得到噪音</li>
+<li>通过向候选版本和稳定版本回放流量，对比其流量差异得到原始区别</li>
+<li>再从原始区别剔除噪音得到最终的diff结果</li>
+</ol>
+<h3 id="diffy工作流程图">Diffy工作流程图<a hidden class="anchor" aria-hidden="true" href="#diffy工作流程图">#</a></h3>
+<p><img loading="lazy" src="/img/diffy_flow.png" alt="Diffy工作流程图"  />
+</p>
+<h3 id="goreplaydiffy工作流程图">GoReplay+Diffy工作流程图<a hidden class="anchor" aria-hidden="true" href="#goreplaydiffy工作流程图">#</a></h3>
+<p><img loading="lazy" src="/img/goreplay_diffy.png" alt="GoReplay&#43;Diffy工作流程图"  />
+</p>
+<h2 id="goreplay使用教程">Goreplay使用教程<a hidden class="anchor" aria-hidden="true" href="#goreplay使用教程">#</a></h2>
+<p><a href="https://github.com/buger/goreplay" target="_blank">项目地址:https://github.com/buger/goreplay</a></p>
+<h3 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h3>
+<blockquote>
+<p>二进制文件安装
+<a href="https://github.com/buger/goreplay/releases" target="_blank">下载二进制文件</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar -zxvf gor_1.3.3_x64.tar.gz
+</span></span><span class="line"><span class="cl">mv gor /usr/local/bin/
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> gor
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#root用户执行，让www用户可以使用</span>
+</span></span><span class="line"><span class="cl">setcap <span class="s2">&#34;cap_net_raw,cap_net_admin+eip&#34;</span>  gor
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>编译安装</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#安装依赖</span>
+</span></span><span class="line"><span class="cl">yum install flex bison -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wget http://www.tcpdump.org/release/libpcap-1.7.4.tar.gz <span class="o">&amp;&amp;</span> tar xzf libpcap-1.7.4.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> libpcap-1.7.4
+</span></span><span class="line"><span class="cl">./configure <span class="o">&amp;&amp;</span> make install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#源码编译</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/buger/goreplay.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span>  goreplay
+</span></span><span class="line"><span class="cl">go mod tidy
+</span></span><span class="line"><span class="cl">go mod vendor
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#需要开启CGO，否则无法编译</span>
+</span></span><span class="line"><span class="cl"><span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span> go build -o ./bin/gor ./cmd/gor/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="参数说明">参数说明<a hidden class="anchor" aria-hidden="true" href="#参数说明">#</a></h3>
+<h4 id="gor可用输入">Gor可用输入<a hidden class="anchor" aria-hidden="true" href="#gor可用输入">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-input-raw</td>
+<td>用于捕获HTTP流量，需要指定IP地址或端口</td>
+<td>gor &ndash;input-raw :8000</td>
+</tr>
+<tr>
+<td>-input-raw-track-response</td>
+<td>默认关闭，开启后会捕获响应数据， 如果响应数据Content-Type：text/html; charset=UTF-8 并且Content-Encoding: gzip响应数据会乱码，需要加上prettify-http参数</td>
+<td>gor &ndash;input-raw :8000&ndash;input-raw-track-response &ndash;prettify-http</td>
+</tr>
+<tr>
+<td>-input-file</td>
+<td>捕获流量保存的文件</td>
+<td>gor &ndash;input-file demo.gor</td>
+</tr>
+<tr>
+<td>–input-tcp</td>
+<td>如果您决定将来自多个转发器Gor实例的流量转发给它，则由Gor聚合实例使用</td>
+<td>gor &ndash;input-tcp :8000&ndash;output-http &ldquo;<a href="http://test1.com" target="_blank">http://test1.com</a>&rdquo; &ndash;output-http &ldquo;<a href="http://test2.com" target="_blank">http://test2.com</a>&rdquo;</td>
+</tr>
+<tr>
+<td>–input-file-loop</td>
+<td>实现无限重播</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="gor可用输出">Gor可用输出<a hidden class="anchor" aria-hidden="true" href="#gor可用输出">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–output-http</td>
+<td>重放HTTP流量到给定的端点</td>
+<td>gor &ndash;input-file 20240112.gor &ndash;output-http=&ldquo;http://127.0.0.1:8003&rdquo;</td>
+</tr>
+<tr>
+<td>–output-file</td>
+<td>记录传入的流量到文件</td>
+<td>gor &ndash;input-raw :8000 &ndash;output-file %Y%m%d.gor</td>
+</tr>
+<tr>
+<td>&ndash;output-file-append</td>
+<td>记录文件以追加的模式</td>
+<td>gor &ndash;input-raw :8000 &ndash;output-file %Y%m%d.gor &ndash;output-file-append</td>
+</tr>
+<tr>
+<td>–output-stdout</td>
+<td>用于调试，输出所有数据到stdout</td>
+<td>gor &ndash;input-raw  :8000 &ndash;output-stdout</td>
+</tr>
+</tbody>
+</table>
+<h4 id="请求过滤gor支持基于urlhttp头http方法进行过滤">请求过滤（gor支持基于url、HTTP头、HTTP方法进行过滤）<a hidden class="anchor" aria-hidden="true" href="#请求过滤gor支持基于urlhttp头http方法进行过滤">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ndash;http-allow-url</td>
+<td>允许URL正则表达式</td>
+<td>gor &ndash;input-raw :8000&ndash;http-allow-url  &lsquo;/api&rsquo;</td>
+</tr>
+<tr>
+<td>&ndash;http-disallow-url</td>
+<td>禁止URL正则表达式</td>
+<td>gor &ndash;input-raw :8000&ndash;http-disallow-url  &lsquo;/api&rsquo;</td>
+</tr>
+<tr>
+<td>&ndash;http-allow-header</td>
+<td>基于HTTP头的正则表达式筛选</td>
+<td>gor &ndash;input-raw :8000&ndash;output-http staging.com &ndash;http-allow-header api-version:^1.0\d</td>
+</tr>
+<tr>
+<td>&ndash;http-allow-method</td>
+<td>基于HTTP方法过滤</td>
+<td>gor &ndash;input-file &ldquo;20240105.gor&rdquo;  &ndash;http-allow-method POST</td>
+</tr>
+<tr>
+<td>&ndash;http-allow-host</td>
+<td>允许host</td>
+<td>gor &ndash;input-file &ldquo;20240105.gor&rdquo;  &ndash;http-allow-host  webstore.menaapp.net</td>
+</tr>
+</tbody>
+</table>
+<h4 id="请求重写gor支持重写urlurl参数http头">请求重写（gor支持重写URL、URL参数、HTTP头）<a hidden class="anchor" aria-hidden="true" href="#请求重写gor支持重写urlurl参数http头">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ndash;http-set-header</td>
+<td>设置消息头，如果HTTP头已经存在，它将被覆盖</td>
+<td>gor &ndash;input-file &ldquo;20240105.gor&rdquo;   &ndash;http-allow-url &lsquo;/api/store/goods&rsquo;  &ndash;http-set-header &lsquo;Content-Type:application/json&rsquo;  &ndash;output-http=&ldquo;http://127.0.0.1:8880&rdquo;</td>
+</tr>
+<tr>
+<td>&ndash;http-set-param</td>
+<td>设置请求url参数，如果参数已经存在，它将被覆盖</td>
+<td>gor &ndash;input-raw :8000&ndash;output-http staging.com &ndash;http-set-param api_key=1</td>
+</tr>
+<tr>
+<td>&ndash;http-rewrite-url</td>
+<td>根据映射重写URL</td>
+<td>gor &ndash;input-raw :8000&ndash;output-http staging.com &ndash;http-rewrite-url /v1/user/([^\/]+)/ping:/v2/user/$1/ping&quot;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="演示示例">演示示例<a hidden class="anchor" aria-hidden="true" href="#演示示例">#</a></h3>
+<blockquote>
+<p>录制流量</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#监听80端口，会录制该机器上面所有域名请求流量</span>
+</span></span><span class="line"><span class="cl">gor --input-raw :80 --output-file %Y%m%d.gor --output-file-append
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#只监听后端端口8080请求流量</span>
+</span></span><span class="line"><span class="cl">gor --input-raw :8080 --output-file %Y%m%d.gor --output-file-append
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>回放流量</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#只允许POST请求，过滤OPTIONS请求，允许URL/api/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gor --input-file <span class="s2">&#34;20240112.gor&#34;</span>  --http-allow-method POST  --http-allow-url <span class="s1">&#39;/api/&#39;</span>  --output-http<span class="o">=</span><span class="s2">&#34;http://127.0.0.1:8000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="其他问题">其他问题<a hidden class="anchor" aria-hidden="true" href="#其他问题">#</a></h3>
+<blockquote>
+<p>不能监听443端口数据，可以用以下方式解决</p>
+</blockquote>
+<ol>
+<li>通过反向代理方式监听后端端口，php项目通过Nginx再转一层；</li>
+<li>线上用的阿里云负载均衡器，只需要监听80端口，就可以监听所有http和https请求</li>
+</ol>
+<h2 id="diffy使用教程">Diffy使用教程<a hidden class="anchor" aria-hidden="true" href="#diffy使用教程">#</a></h2>
+<p><a href="https://github.com/opendiffy/diffy" target="_blank">项目地址:https://github.com/opendiffy/diffy</a></p>
+<h3 id="安装部署diffy">安装部署Diffy<a hidden class="anchor" aria-hidden="true" href="#安装部署diffy">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#下载Java 17二进制文件</span>
+</span></span><span class="line"><span class="cl">wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+</span></span><span class="line"><span class="cl">yum -y install ./jdk-17_linux-x64_bin.rpm
+</span></span><span class="line"><span class="cl">java -version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="参数说明-1">参数说明<a hidden class="anchor" aria-hidden="true" href="#参数说明-1">#</a></h3>
+<ol>
+<li>candidate  重构后新代码的网络地址</li>
+<li>master.primary  旧代码的网络地址，用于为正确行为提供基线</li>
+<li>master.secondary  用于检测噪音的旧代码的另一个实例的网络地址</li>
+<li>proxy.port  此端口用于接收将转发到服务实例的请求</li>
+<li>http.port   此端口用于为 UI 提供服务</li>
+<li>allowHttpSideEffects  出于安全原因，默认情况下会忽略 POST、PUT、PATCH、DELETE。将参数添加到 &ndash;allowHttpSideEffects=true 命令行以启用</li>
+</ol>
+<h3 id="启动服务">启动服务<a hidden class="anchor" aria-hidden="true" href="#启动服务">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">java -jar ./diffy.jar <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--candidate<span class="o">=</span><span class="s1">&#39;127.0.0.1:8003&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--master.primary<span class="o">=</span><span class="s1">&#39;127.0.0.1:8001&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--master.secondary<span class="o">=</span><span class="s1">&#39;127.0.0.1:8002&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--responseMode<span class="o">=</span><span class="s1">&#39;candidate&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--allowHttpSideEffects<span class="o">=</span><span class="s1">&#39;true&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--service.protocol<span class="o">=</span>http <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--serviceName<span class="o">=</span>My-Service <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--proxy.port<span class="o">=</span><span class="m">8880</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--http.port<span class="o">=</span><span class="m">8888</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#监听18000流量</span>
+</span></span><span class="line"><span class="cl">gor --input-raw :8000 --output-http<span class="o">=</span><span class="s2">&#34;http://127.0.0.1:8880&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#浏览器查看Diffy UI界面</span>
+</span></span><span class="line"><span class="cl">http://127.0.0.1:8888
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img loading="lazy" src="/img/diffy_ui.png" alt="Diffy-UI"  />
+</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://momobaba.top/tags/golang/">Golang</a></li>
+      <li><a href="https://momobaba.top/tags/goreplay/">Goreplay</a></li>
+      <li><a href="https://momobaba.top/tags/diffy/">Diffy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://momobaba.top/post/nextjs-nuxtjs/">
+    <span class="title">Next »</span>
+    <br>
+    <span>前端Nextjs和Nuxtjs框架学习</span>
+  </a>
+</nav>
+
+  </footer>
+
+<script
+  src="https://utteranc.es/client.js"
+  repo="moxiaobai/moxiaobai.github.io"
+  issue-term="pathname"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://momobaba.top/">莫小白的技术博客</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
