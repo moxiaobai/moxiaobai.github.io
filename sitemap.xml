@@ -2,164 +2,164 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://momobaba.top/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/diffy/</loc>
+    <loc>http://localhost:1313/tags/diffy/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/golang/</loc>
+    <loc>http://localhost:1313/tags/golang/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/goreplay/</loc>
+    <loc>http://localhost:1313/tags/goreplay/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/goreplay/</loc>
+    <loc>http://localhost:1313/post/goreplay/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/</loc>
+    <loc>http://localhost:1313/post/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-01-12T22:00:36+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/nextjs/</loc>
+    <loc>http://localhost:1313/tags/nextjs/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/nuxtjs/</loc>
+    <loc>http://localhost:1313/tags/nuxtjs/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>http://localhost:1313/categories/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/nextjs-nuxtjs/</loc>
+    <loc>http://localhost:1313/post/nextjs-nuxtjs/</loc>
     <lastmod>2023-12-12T20:59:57+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/chaosblade/</loc>
+    <loc>http://localhost:1313/post/chaosblade/</loc>
     <lastmod>2023-07-30T19:47:43+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</loc>
+    <loc>http://localhost:1313/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</loc>
     <lastmod>2023-07-30T19:47:43+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/devops/</loc>
+    <loc>http://localhost:1313/tags/devops/</loc>
     <lastmod>2023-07-13T18:40:32+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/devops/</loc>
+    <loc>http://localhost:1313/categories/devops/</loc>
     <lastmod>2023-07-13T18:40:32+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/gitlab/</loc>
+    <loc>http://localhost:1313/tags/gitlab/</loc>
     <lastmod>2023-07-13T18:40:32+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/gitlab-devops-cicd/</loc>
+    <loc>http://localhost:1313/post/gitlab-devops-cicd/</loc>
     <lastmod>2023-07-13T18:40:32+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/elasticsearch/</loc>
+    <loc>http://localhost:1313/tags/elasticsearch/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/filebeat/</loc>
+    <loc>http://localhost:1313/tags/filebeat/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/golang/</loc>
+    <loc>http://localhost:1313/categories/golang/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/kafka/</loc>
+    <loc>http://localhost:1313/tags/kafka/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/kibana/</loc>
+    <loc>http://localhost:1313/tags/kibana/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/log-filebeat-kafka-es/</loc>
+    <loc>http://localhost:1313/post/log-filebeat-kafka-es/</loc>
     <lastmod>2023-01-07T20:41:58+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/go-kafaka/</loc>
+    <loc>http://localhost:1313/post/go-kafaka/</loc>
     <lastmod>2023-01-02T20:32:05+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <loc>http://localhost:1313/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
     <lastmod>2023-01-02T20:32:05+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/kafka/</loc>
+    <loc>http://localhost:1313/post/kafka/</loc>
     <lastmod>2022-12-26T21:31:04+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <loc>http://localhost:1313/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
     <lastmod>2022-12-26T21:31:04+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/go-rabbitmq/</loc>
+    <loc>http://localhost:1313/post/go-rabbitmq/</loc>
     <lastmod>2022-12-17T21:30:38+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/rabbitmq/</loc>
+    <loc>http://localhost:1313/tags/rabbitmq/</loc>
     <lastmod>2022-12-17T21:30:38+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/etcd/</loc>
+    <loc>http://localhost:1313/tags/etcd/</loc>
     <lastmod>2022-12-11T18:15:43+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/etcd/</loc>
+    <loc>http://localhost:1313/post/etcd/</loc>
     <lastmod>2022-12-11T18:15:43+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</loc>
+    <loc>http://localhost:1313/categories/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</loc>
     <lastmod>2022-12-11T18:15:43+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/golang-pprof/</loc>
+    <loc>http://localhost:1313/post/golang-pprof/</loc>
     <lastmod>2022-11-27T21:28:51+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/php/</loc>
+    <loc>http://localhost:1313/tags/php/</loc>
     <lastmod>2022-11-21T15:30:17+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/rabbitmq-exchange/</loc>
+    <loc>http://localhost:1313/post/rabbitmq-exchange/</loc>
     <lastmod>2022-11-21T15:30:17+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/linux/</loc>
+    <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/linux/</loc>
+    <loc>http://localhost:1313/categories/linux/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/nginx/</loc>
+    <loc>http://localhost:1313/tags/nginx/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/nginx-restricts-country-access/</loc>
+    <loc>http://localhost:1313/post/nginx-restricts-country-access/</loc>
     <lastmod>2022-11-08T09:05:52+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/https/</loc>
+    <loc>http://localhost:1313/tags/https/</loc>
     <lastmod>2022-10-23T16:25:03+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/free-https/</loc>
+    <loc>http://localhost:1313/post/free-https/</loc>
     <lastmod>2022-10-23T16:25:03+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/grafana/</loc>
+    <loc>http://localhost:1313/tags/grafana/</loc>
     <lastmod>2022-10-12T21:40:38+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/prometheus/</loc>
+    <loc>http://localhost:1313/tags/prometheus/</loc>
     <lastmod>2022-10-12T21:40:38+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/go-goroutine-disclosure/</loc>
+    <loc>http://localhost:1313/post/go-goroutine-disclosure/</loc>
     <lastmod>2022-10-12T21:40:38+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/php/</loc>
+    <loc>http://localhost:1313/categories/php/</loc>
     <lastmod>2022-10-09T20:29:27+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/php-fpm-monitor/</loc>
+    <loc>http://localhost:1313/post/php-fpm-monitor/</loc>
     <lastmod>2022-10-09T20:29:27+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/go-goroutine/</loc>
+    <loc>http://localhost:1313/post/go-goroutine/</loc>
     <lastmod>2022-09-25T17:18:02+08:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/categories/github/</loc>
+    <loc>http://localhost:1313/categories/github/</loc>
     <lastmod>2022-09-15T11:30:03+00:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/tags/hugo/</loc>
+    <loc>http://localhost:1313/tags/hugo/</loc>
     <lastmod>2022-09-15T11:30:03+00:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/post/my-first-post/</loc>
+    <loc>http://localhost:1313/post/my-first-post/</loc>
     <lastmod>2022-09-15T11:30:03+00:00</lastmod>
   </url><url>
-    <loc>https://momobaba.top/archives/</loc>
+    <loc>http://localhost:1313/archives/</loc>
   </url><url>
-    <loc>https://momobaba.top/search/</loc>
+    <loc>http://localhost:1313/search/</loc>
   </url>
 </urlset>

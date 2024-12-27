@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Devops on 莫小白的技术博客</title>
-    <link>https://momobaba.top/categories/devops/</link>
+    <link>http://localhost:1313/categories/devops/</link>
     <description>Recent content in Devops on 莫小白的技术博客</description>
     <image>
-      <url>https://momobaba.top/papermod-cover.png</url>
-      <link>https://momobaba.top/papermod-cover.png</link>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 13 Jul 2023 18:40:32 +0800</lastBuildDate><atom:link href="https://momobaba.top/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jul 2023 18:40:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gitlab Devops CICD</title>
-      <link>https://momobaba.top/post/gitlab-devops-cicd/</link>
+      <link>http://localhost:1313/post/gitlab-devops-cicd/</link>
       <pubDate>Thu, 13 Jul 2023 18:40:32 +0800</pubDate>
       
-      <guid>https://momobaba.top/post/gitlab-devops-cicd/</guid>
+      <guid>http://localhost:1313/post/gitlab-devops-cicd/</guid>
       <description>&lt;p&gt;GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。&lt;/p&gt;</description>
     </item>
     

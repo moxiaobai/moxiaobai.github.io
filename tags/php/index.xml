@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PHP on 莫小白的技术博客</title>
-    <link>https://momobaba.top/tags/php/</link>
+    <link>http://localhost:1313/tags/php/</link>
     <description>Recent content in PHP on 莫小白的技术博客</description>
     <image>
-      <url>https://momobaba.top/papermod-cover.png</url>
-      <link>https://momobaba.top/papermod-cover.png</link>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 21 Nov 2022 15:30:17 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Nov 2022 15:30:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/php/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RabbitMQ 交换器常用三种类型介绍</title>
-      <link>https://momobaba.top/post/rabbitmq-exchange/</link>
+      <link>http://localhost:1313/post/rabbitmq-exchange/</link>
       <pubDate>Mon, 21 Nov 2022 15:30:17 +0800</pubDate>
       
-      <guid>https://momobaba.top/post/rabbitmq-exchange/</guid>
+      <guid>http://localhost:1313/post/rabbitmq-exchange/</guid>
       <description>&lt;hr&gt;
 &lt;p&gt;RabbitMQ 交换器常用三种类型介绍：direct: (默认)直接交换器；fanout: 广播式交换器； topic:  主题交换器&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Prometheus&#43;Grafana监控PHP-FPM</title>
-      <link>https://momobaba.top/post/php-fpm-monitor/</link>
+      <link>http://localhost:1313/post/php-fpm-monitor/</link>
       <pubDate>Sun, 09 Oct 2022 20:29:27 +0800</pubDate>
       
-      <guid>https://momobaba.top/post/php-fpm-monitor/</guid>
+      <guid>http://localhost:1313/post/php-fpm-monitor/</guid>
       <description>&lt;p&gt;为什么要监控php-fpm的状态？ 因为php-fpm多进程模型，线上一般都是static静态进程数配置，很容易因为I/O慢导致进程全部占满，造成拒绝服务。通过Prometheus采集PHP-FPM的性能指标来监控PHP-FPM&lt;/p&gt;</description>
     </item>
     

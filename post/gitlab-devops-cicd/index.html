@@ -1,88 +1,121 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Gitlab Devops CICD | 莫小白的技术博客</title>
-<meta name="keywords" content="Devops, Gitlab">
-<meta name="description" content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。">
-<meta name="author" content="">
-<link rel="canonical" href="https://momobaba.top/post/gitlab-devops-cicd/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
-    onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+<meta name="google-adsense-account" content="ca-pub-7448149743811927" />
+<meta name="robots" content="index, follow" />
+<title>
+  Gitlab Devops CICD | 莫小白的技术博客
+</title>
+<meta
+  name="keywords"
+  content="Devops, Gitlab"
+/> <meta name="description" content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。"> <meta name="author" content=""> <link rel="canonical" href="http://localhost:1313/post/gitlab-devops-cicd/">
+<link
+  crossorigin="anonymous"
+  href="/assets/css/stylesheet.79ee8125cfdc8fd93dc42a993d3b57d95789de44fe593f658af8d0fbbeb93148.css"
+  integrity="sha256-ee6BJc/cj9k9xCqZPTtX2VeJ3kT&#43;WT9livjQ&#43;765MUg="
+  rel="preload stylesheet"
+  as="style"
+/>
+<script
+  defer
+  crossorigin="anonymous"
+  src="/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js"
+  integrity="sha256-rLVP0yu8GYJCi4hQMX5F0Ha5UBJzClk2Zn5rwhd3aSo="
+  onload="hljs.initHighlightingOnLoad();"
+></script> <link rel="icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link
+rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link rel="mask-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <meta name="theme-color" content="#2e2e33"> <meta name="msapplication-TileColor" content="#2e2e33"> <link rel="alternate" hreflang="en" href="http://localhost:1313/post/gitlab-devops-cicd/" />
 <noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
+  <style>
+    #theme-toggle,
+    .top-link {
+      display: none;
+    }
+  </style>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme: rgb(29, 30, 32);
+        --entry: rgb(46, 46, 51);
+        --primary: rgb(218, 218, 219);
+        --secondary: rgb(155, 156, 157);
+        --tertiary: rgb(65, 66, 68);
+        --content: rgb(196, 196, 197);
+        --hljs-bg: rgb(46, 46, 51);
+        --code-bg: rgb(55, 56, 62);
+        --border: rgb(51, 51, 51);
+      }
 
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
+      .list {
+        background: var(--theme);
+      }
 
-            .list {
-                background: var(--theme);
-            }
+      .list:not(.dark)::-webkit-scrollbar-track {
+        background: 0 0;
+      }
 
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
+      .list:not(.dark)::-webkit-scrollbar-thumb {
+        border-color: var(--theme);
+      }
+    }
+  </style>
 </noscript><link
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
-}
-</script>
-<meta property="og:title" content="Gitlab Devops CICD" />
-<meta property="og:description" content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://momobaba.top/post/gitlab-devops-cicd/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-07-13T18:40:32&#43;08:00" />
-<meta property="article:modified_time" content="2023-07-13T18:40:32&#43;08:00" /><meta property="og:site_name" content="莫小白的技术博客" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7083ELYPJY');
+        }
+      </script><meta property="og:title" content="Gitlab Devops CICD" />
+<meta
+  property="og:description"
+  content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。"
+/>
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta property="og:url" content="http://localhost:1313/post/gitlab-devops-cicd/" /><meta
+  property="og:image"
+  content="http://localhost:1313/papermod-cover.png"
+/><meta property="article:section" content="post" />
+<meta
+  property="article:published_time"
+  content="2023-07-13T18:40:32&#43;08:00"
+/> <meta
+  property="article:modified_time"
+  content="2023-07-13T18:40:32&#43;08:00"
+/><meta
+  property="og:site_name"
+  content="莫小白的技术博客"
+/> 
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/papermod-cover.png" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Gitlab Devops CICD"/>
-<meta name="twitter:description" content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。"/>
+<meta name="twitter:title" content="Gitlab Devops CICD" />
+<meta
+  name="twitter:description"
+  content="GitLab 是一个强大的开源代码托管平台，它还提供了一套完整的 CI/CD（持续集成/持续交付）工具，称为 GitLab CI/CD。通过 GitLab CI/CD，您可以实现自动化的构建、测试和部署流程，以帮助加快软件交付速度和质量。"
+/>
 
 
 <script type="application/ld+json">
@@ -94,13 +127,13 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://momobaba.top/post/"
+      "item": "http://localhost:1313/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Gitlab Devops CICD",
-      "item": "https://momobaba.top/post/gitlab-devops-cicd/"
+      "item": "http://localhost:1313/post/gitlab-devops-cicd/"
     }
   ]
 }
@@ -122,14 +155,14 @@ if (!doNotTrack) {
   "dateModified": "2023-07-13T18:40:32+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://momobaba.top/post/gitlab-devops-cicd/"
+    "@id": "http://localhost:1313/post/gitlab-devops-cicd/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "莫小白的技术博客",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
+      "url": "http://localhost:1313/%3Clink%20/%20abs%20url%3E"
     }
   }
 }
@@ -151,7 +184,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <a href="http://localhost:1313/" accesskey="h" title="首页 (Alt + H)">首页</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -173,26 +206,28 @@ if (!doNotTrack) {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://momobaba.top/archives/" title="归档">
+                <a href="http://localhost:1313/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/search/" title="搜索">
+                <a href="http://localhost:1313/search/" title="搜索">
                     <span>搜索</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -208,11 +243,11 @@ if (!doNotTrack) {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/post/">Posts</a></div>
     <h1 class="post-title">
       Gitlab Devops CICD
     </h1>
-    <div class="post-meta"><span title='2023-07-13 18:40:32 +0800 CST'>July 13, 2023</span>&nbsp;·&nbsp;3 min
+    <div class="post-meta">&lt;span title=&#39;2023-07-13 18:40:32 &#43;0800 CST&#39;&gt;July 13, 2023&lt;/span&gt;&amp;nbsp;·&amp;nbsp;3 min
 
 </div>
   </header> <div class="toc">
@@ -508,84 +543,84 @@ if (!doNotTrack) {
 </span><span class="lnt">77
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">GOPATH</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">go</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="n">GOPATH</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UPLOAD</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">toolPackage</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BIN</span><span class="o">=</span><span class="s2">&#34;./bin&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SRC</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="s2">&#34;*.go&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">GO</span><span class="w">        </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">GO111MODULE</span><span class="o">=</span><span class="k">on</span><span class="w"> </span><span class="n">go</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">GOBUILD</span><span class="w">   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">GO</span><span class="p">)</span><span class="w"> </span><span class="n">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BINARY_NAME</span><span class="w">   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">web</span><span class="o">-</span><span class="n">api</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">CONF</span><span class="w">      </span><span class="p">:</span><span class="o">=</span><span class="p">.</span><span class="n">golangci</span><span class="p">.</span><span class="n">yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BINARY_FILE</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifeq</span><span class="w"> </span><span class="p">(,</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">golangci</span><span class="o">-</span><span class="n">lint</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">$</span><span class="p">(</span><span class="n">warning</span><span class="w"> </span><span class="s2">&#34;could not find golangci-lint in $(PATH), run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifeq</span><span class="w"> </span><span class="p">(,</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">richgo</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">$</span><span class="p">(</span><span class="n">warning</span><span class="w"> </span><span class="s2">&#34;could not find richgo in $(PATH), run: go get github.com/kyoh86/richgo&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">.</span><span class="n">PHONY</span><span class="p">:</span><span class="w"> </span><span class="n">fmt</span><span class="w"> </span><span class="n">lint</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">install_deps</span><span class="w"> </span><span class="n">clean</span><span class="w"> </span><span class="n">build_beta</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">zip</span><span class="w"> </span><span class="n">zip_beta</span><span class="w"> </span><span class="n">pack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">all</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">fmt</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">info</span><span class="w"> </span><span class="o">********************</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="n">formatting</span><span class="w"> </span><span class="o">********************</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="n">test</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">gofmt</span><span class="w"> </span><span class="o">-</span><span class="n">l</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">SRC</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">gofmt</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">SRC</span><span class="p">);</span><span class="w"> </span><span class="k">exit</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">lint</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">info</span><span class="w"> </span><span class="o">********************</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">lint</span><span class="w"> </span><span class="n">tools</span><span class="w"> </span><span class="o">********************</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">golangci</span><span class="o">-</span><span class="n">lint</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">CONF</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">test</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">info</span><span class="w"> </span><span class="o">********************</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="o">********************</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">richgo</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">install_deps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">info</span><span class="w"> </span><span class="o">********************</span><span class="w"> </span><span class="n">downloading</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="o">********************</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">go</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="err">$</span><span class="p">(</span><span class="n">GOBUILD</span><span class="p">)</span><span class="w">  </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BIN</span><span class="p">)</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">cmd</span><span class="o">/</span><span class="n">web</span><span class="o">/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">zip</span><span class="p">:</span><span class="w"> </span><span class="n">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">).</span><span class="n">zip</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="n">zip</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">).</span><span class="n">zip</span><span class="w"> </span><span class="n">bin</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">clean</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BIN</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pack</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifneq</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">),</span><span class="err">$</span><span class="p">(</span><span class="n">wildcard</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="o">`</span><span class="n">make</span><span class="w"> </span><span class="n">build</span><span class="o">`</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifeq</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">),</span><span class="s2">&#34;&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="o">`</span><span class="n">git</span><span class="w"> </span><span class="n">tag</span><span class="o">`</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">czf</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">).</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pack</span><span class="o">-</span><span class="n">test</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifneq</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">),</span><span class="err">$</span><span class="p">(</span><span class="n">wildcard</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="o">`</span><span class="n">make</span><span class="w"> </span><span class="n">build</span><span class="o">`</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">@</span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">czf</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="n">develop</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">deploy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ifeq</span><span class="w"> </span><span class="s2">&#34;$(UPLOAD)&#34;</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">environment</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">toolPackage</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="o">`</span><span class="n">make</span><span class="o">`</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">ifneq</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">).</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="p">,</span><span class="err">$</span><span class="p">(</span><span class="n">wildcard</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">).</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="o">`</span><span class="n">make</span><span class="w"> </span><span class="n">pack</span><span class="o">`</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">endif</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">toolPackage</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">).</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">webApi</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">rmk</span><span class="w"> </span><span class="s2">&#34;$(MESSAGE)&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">deploy</span><span class="o">-</span><span class="n">test</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">toolPackage</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="n">develop</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">webApi</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">shell</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="k">describe</span><span class="w"> </span><span class="o">--</span><span class="n">tags</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">rmk</span><span class="w"> </span><span class="s2">&#34;$(MESSAGE)&#34;</span><span class="w"> </span><span class="o">-</span><span class="n">env</span><span class="w"> </span><span class="n">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">all</span><span class="p">:</span><span class="w"> </span><span class="n">lint</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">pack</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">GOPATH</span> <span class="err">?</span><span class="o">=</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">go</span> <span class="n">env</span> <span class="n">GOPATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">UPLOAD</span> <span class="err">?</span><span class="o">=</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">which</span> <span class="n">toolPackage</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">BIN</span><span class="o">=</span><span class="s2">&#34;./bin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">SRC</span><span class="o">=$</span><span class="p">(</span><span class="n">shell</span> <span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&#34;*.go&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">GO</span>        <span class="p">:</span><span class="o">=</span> <span class="n">GO111MODULE</span><span class="o">=</span><span class="n">on</span> <span class="n">go</span>
+</span></span><span class="line"><span class="cl"><span class="n">GOBUILD</span>   <span class="p">:</span><span class="o">=</span> <span class="o">$</span><span class="p">(</span><span class="n">GO</span><span class="p">)</span> <span class="n">build</span>
+</span></span><span class="line"><span class="cl"><span class="n">BINARY_NAME</span>   <span class="p">:</span><span class="o">=</span> <span class="n">web</span><span class="o">-</span><span class="n">api</span>
+</span></span><span class="line"><span class="cl"><span class="n">CONF</span>      <span class="p">:</span><span class="o">=.</span><span class="n">golangci</span><span class="o">.</span><span class="n">yml</span>
+</span></span><span class="line"><span class="cl"><span class="n">BINARY_FILE</span> <span class="p">:</span><span class="o">=</span> <span class="o">./</span><span class="n">bin</span><span class="o">/$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ifeq</span> <span class="p">(,</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">which</span> <span class="n">golangci</span><span class="o">-</span><span class="n">lint</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="p">(</span><span class="n">warning</span> <span class="s2">&#34;could not find golangci-lint in $(PATH), run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ifeq</span> <span class="p">(,</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">which</span> <span class="n">richgo</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="p">(</span><span class="n">warning</span> <span class="s2">&#34;could not find richgo in $(PATH), run: go get github.com/kyoh86/richgo&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">PHONY</span><span class="p">:</span> <span class="n">fmt</span> <span class="n">lint</span> <span class="n">test</span> <span class="n">install_deps</span> <span class="n">clean</span> <span class="n">build_beta</span> <span class="n">build</span> <span class="n">zip</span> <span class="n">zip_beta</span> <span class="n">pack</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">default</span><span class="p">:</span> <span class="n">all</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fmt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">info</span> <span class="o">********************</span> <span class="n">checking</span> <span class="n">formatting</span> <span class="o">********************</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="n">test</span> <span class="o">-</span><span class="n">z</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">gofmt</span> <span class="o">-</span><span class="n">l</span> <span class="o">$</span><span class="p">(</span><span class="n">SRC</span><span class="p">))</span> <span class="o">||</span> <span class="p">(</span><span class="n">gofmt</span> <span class="o">-</span><span class="n">d</span> <span class="o">$</span><span class="p">(</span><span class="n">SRC</span><span class="p">);</span> <span class="n">exit</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lint</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">info</span> <span class="o">********************</span> <span class="n">running</span> <span class="n">lint</span> <span class="n">tools</span> <span class="o">********************</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">golangci</span><span class="o">-</span><span class="n">lint</span> <span class="n">run</span> <span class="o">-</span><span class="n">c</span> <span class="o">$</span><span class="p">(</span><span class="n">CONF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">info</span> <span class="o">********************</span> <span class="n">running</span> <span class="n">tests</span> <span class="o">********************</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">richgo</span> <span class="n">test</span> <span class="o">-</span><span class="n">v</span> <span class="o">./...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">install_deps</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">info</span> <span class="o">********************</span> <span class="n">downloading</span> <span class="n">dependencies</span> <span class="o">********************</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">go</span> <span class="n">get</span> <span class="o">-</span><span class="n">v</span> <span class="o">./...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">build</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="o">$</span><span class="p">(</span><span class="n">GOBUILD</span><span class="p">)</span>  <span class="o">-</span><span class="n">o</span> <span class="o">$</span><span class="p">(</span><span class="n">BIN</span><span class="p">)</span><span class="o">/$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span> <span class="o">./</span><span class="n">cmd</span><span class="o">/</span><span class="n">web</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">zip</span><span class="p">:</span> <span class="n">build</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">zip</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="n">zip</span> <span class="o">-</span><span class="n">j</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">zip</span> <span class="n">bin</span><span class="o">/$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">clean</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">$</span><span class="p">(</span><span class="n">BIN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pack</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">ifneq</span> <span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">),</span><span class="o">$</span><span class="p">(</span><span class="n">wildcard</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">error</span> <span class="n">Please</span> <span class="n">running</span> <span class="err">`</span><span class="n">make</span> <span class="n">build</span><span class="err">`</span> <span class="n">first</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl"><span class="n">ifeq</span> <span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">),</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">error</span> <span class="n">Please</span> <span class="n">running</span> <span class="err">`</span><span class="n">git</span> <span class="n">tag</span><span class="err">`</span> <span class="n">first</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="n">tar</span> <span class="o">-</span><span class="n">czf</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl"><span class="n">pack</span><span class="o">-</span><span class="n">test</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">ifneq</span> <span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">),</span><span class="o">$</span><span class="p">(</span><span class="n">wildcard</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">error</span> <span class="n">Please</span> <span class="n">running</span> <span class="err">`</span><span class="n">make</span> <span class="n">build</span><span class="err">`</span> <span class="n">first</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl">	<span class="err">@</span><span class="n">tar</span> <span class="o">-</span><span class="n">czf</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="n">develop</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_FILE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">deploy</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">ifeq</span> <span class="s2">&#34;$(UPLOAD)&#34;</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">error</span> <span class="n">Please</span> <span class="n">set</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">toolPackage</span> <span class="n">before</span> <span class="n">running</span> <span class="err">`</span><span class="n">make</span><span class="err">`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl"><span class="n">ifneq</span> <span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span><span class="o">$</span><span class="p">(</span><span class="n">wildcard</span> <span class="o">$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="o">$</span><span class="p">(</span><span class="n">error</span> <span class="n">Please</span> <span class="n">running</span> <span class="err">`</span><span class="n">make</span> <span class="n">pack</span><span class="err">`</span> <span class="n">first</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">endif</span>
+</span></span><span class="line"><span class="cl">	<span class="n">toolPackage</span> <span class="o">-</span><span class="n">f</span> <span class="o">./$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">p</span> <span class="n">webApi</span> <span class="o">-</span><span class="n">t</span> <span class="n">app</span> <span class="o">-</span><span class="n">v</span> <span class="o">$</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span> <span class="o">-</span><span class="n">rmk</span> <span class="s2">&#34;$(MESSAGE)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">deploy</span><span class="o">-</span><span class="n">test</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">toolPackage</span> <span class="o">-</span><span class="n">f</span> <span class="o">./$</span><span class="p">(</span><span class="n">BINARY_NAME</span><span class="p">)</span><span class="o">-</span><span class="n">develop</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">p</span> <span class="n">webApi</span> <span class="o">-</span><span class="n">t</span> <span class="n">app</span> <span class="o">-</span><span class="n">v</span> <span class="o">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">git</span> <span class="n">describe</span> <span class="o">--</span><span class="n">tags</span><span class="p">)</span> <span class="o">-</span><span class="n">rmk</span> <span class="s2">&#34;$(MESSAGE)&#34;</span> <span class="o">-</span><span class="n">env</span> <span class="n">test</span>
+</span></span><span class="line"><span class="cl"><span class="n">all</span><span class="p">:</span> <span class="n">lint</span> <span class="n">build</span> <span class="n">pack</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="pipelines">Pipelines<a hidden class="anchor" aria-hidden="true" href="#pipelines">#</a></h2>
 <p><img loading="lazy" src="/img/gitlab-pipeline.png" alt="gitlab-pipeline"  />
@@ -595,16 +630,16 @@ if (!doNotTrack) {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://momobaba.top/tags/devops/">Devops</a></li>
-      <li><a href="https://momobaba.top/tags/gitlab/">Gitlab</a></li>
+      <li><a href="http://localhost:1313/tags/devops/">Devops</a></li>
+      <li><a href="http://localhost:1313/tags/gitlab/">Gitlab</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://momobaba.top/post/chaosblade/">
+  <a class="prev" href="http://localhost:1313/post/chaosblade/">
     <span class="title">« Prev</span>
     <br>
     <span>ChaosBlade故障模拟</span>
   </a>
-  <a class="next" href="https://momobaba.top/post/log-filebeat-kafka-es/">
+  <a class="next" href="http://localhost:1313/post/log-filebeat-kafka-es/">
     <span class="title">Next »</span>
     <br>
     <span>本地文本日志通过filebeat写入到ES</span>
@@ -625,7 +660,7 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://momobaba.top/">莫小白的技术博客</a></span>
+    <span>&copy; 2024 <a href="http://localhost:1313/">莫小白的技术博客</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

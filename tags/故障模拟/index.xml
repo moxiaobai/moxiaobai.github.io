@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>故障模拟 on 莫小白的技术博客</title>
-    <link>https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</link>
+    <link>http://localhost:1313/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/</link>
     <description>Recent content in 故障模拟 on 莫小白的技术博客</description>
     <image>
-      <url>https://momobaba.top/papermod-cover.png</url>
-      <link>https://momobaba.top/papermod-cover.png</link>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 30 Jul 2023 19:47:43 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jul 2023 19:47:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%95%85%E9%9A%9C%E6%A8%A1%E6%8B%9F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ChaosBlade故障模拟</title>
-      <link>https://momobaba.top/post/chaosblade/</link>
+      <link>http://localhost:1313/post/chaosblade/</link>
       <pubDate>Sun, 30 Jul 2023 19:47:43 +0800</pubDate>
       
-      <guid>https://momobaba.top/post/chaosblade/</guid>
+      <guid>http://localhost:1313/post/chaosblade/</guid>
       <description>&lt;p&gt;线上网络很复杂，经常会出现波动，延迟，无法访问，各种异常情况。这些场景，我们在开发阶段经常容易忽略。如果程序不考虑这些异常，会导致我们程序不能按照预期执行或者会出现服务阻塞不可用。
 比如：没有设置mysql读写超时时间；消息队列服务异常，我们需要保障数据不丢失；&lt;/p&gt;</description>
     </item>

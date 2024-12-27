@@ -1,91 +1,124 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Go Rabbitmq 示例代码 | 莫小白的技术博客</title>
-<meta name="keywords" content="Golang, 消息队列, RabbitMQ">
-<meta name="description" content="
-Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码">
-<meta name="author" content="">
-<link rel="canonical" href="https://momobaba.top/post/go-rabbitmq/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.22ce1695bf57598428189de5c909c73997d1d335979b7bc290c44e1e26bb04fc.css" integrity="sha256-Is4Wlb9XWYQoGJ3lyQnHOZfR0zWXm3vCkMROHia7BPw=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
-    onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+<meta name="google-adsense-account" content="ca-pub-7448149743811927" />
+<meta name="robots" content="index, follow" />
+<title>
+  Go Rabbitmq 示例代码 | 莫小白的技术博客
+</title>
+<meta
+  name="keywords"
+  content="Golang, 消息队列, RabbitMQ"
+/> <meta name="description" content="
+Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码"> <meta name="author" content=""> <link rel="canonical" href="http://localhost:1313/post/go-rabbitmq/">
+<link
+  crossorigin="anonymous"
+  href="/assets/css/stylesheet.79ee8125cfdc8fd93dc42a993d3b57d95789de44fe593f658af8d0fbbeb93148.css"
+  integrity="sha256-ee6BJc/cj9k9xCqZPTtX2VeJ3kT&#43;WT9livjQ&#43;765MUg="
+  rel="preload stylesheet"
+  as="style"
+/>
+<script
+  defer
+  crossorigin="anonymous"
+  src="/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js"
+  integrity="sha256-rLVP0yu8GYJCi4hQMX5F0Ha5UBJzClk2Zn5rwhd3aSo="
+  onload="hljs.initHighlightingOnLoad();"
+></script> <link rel="icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link
+rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link rel="mask-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <meta name="theme-color" content="#2e2e33"> <meta name="msapplication-TileColor" content="#2e2e33"> <link rel="alternate" hreflang="en" href="http://localhost:1313/post/go-rabbitmq/" />
 <noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
+  <style>
+    #theme-toggle,
+    .top-link {
+      display: none;
+    }
+  </style>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme: rgb(29, 30, 32);
+        --entry: rgb(46, 46, 51);
+        --primary: rgb(218, 218, 219);
+        --secondary: rgb(155, 156, 157);
+        --tertiary: rgb(65, 66, 68);
+        --content: rgb(196, 196, 197);
+        --hljs-bg: rgb(46, 46, 51);
+        --code-bg: rgb(55, 56, 62);
+        --border: rgb(51, 51, 51);
+      }
 
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
+      .list {
+        background: var(--theme);
+      }
 
-            .list {
-                background: var(--theme);
-            }
+      .list:not(.dark)::-webkit-scrollbar-track {
+        background: 0 0;
+      }
 
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
+      .list:not(.dark)::-webkit-scrollbar-thumb {
+        border-color: var(--theme);
+      }
+    }
+  </style>
 </noscript><link
   rel="stylesheet"
   href="https://cdn.staticfile.org/hack-font/3.3.0/web/hack.min.css"
 />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-7083ELYPJY', { 'anonymize_ip': false });
-}
-</script>
-<meta property="og:title" content="Go Rabbitmq 示例代码" />
-<meta property="og:description" content="
-Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://momobaba.top/post/go-rabbitmq/" /><meta property="og:image" content="https://momobaba.top/papermod-cover.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-12-17T21:30:38&#43;08:00" />
-<meta property="article:modified_time" content="2022-12-17T21:30:38&#43;08:00" /><meta property="og:site_name" content="莫小白的技术博客" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7083ELYPJY"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7083ELYPJY');
+        }
+      </script><meta property="og:title" content="Go Rabbitmq 示例代码" />
+<meta
+  property="og:description"
+  content="
+Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码"
+/>
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta property="og:url" content="http://localhost:1313/post/go-rabbitmq/" /><meta
+  property="og:image"
+  content="http://localhost:1313/papermod-cover.png"
+/><meta property="article:section" content="post" />
+<meta
+  property="article:published_time"
+  content="2022-12-17T21:30:38&#43;08:00"
+/> <meta
+  property="article:modified_time"
+  content="2022-12-17T21:30:38&#43;08:00"
+/><meta
+  property="og:site_name"
+  content="莫小白的技术博客"
+/> 
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/papermod-cover.png" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Go Rabbitmq 示例代码"/>
-<meta name="twitter:description" content="
-Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码"/>
+<meta name="twitter:title" content="Go Rabbitmq 示例代码" />
+<meta
+  name="twitter:description"
+  content="
+Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码"
+/>
 
 
 <script type="application/ld+json">
@@ -97,13 +130,13 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://momobaba.top/post/"
+      "item": "http://localhost:1313/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Go Rabbitmq 示例代码",
-      "item": "https://momobaba.top/post/go-rabbitmq/"
+      "item": "http://localhost:1313/post/go-rabbitmq/"
     }
   ]
 }
@@ -125,14 +158,14 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
   "dateModified": "2022-12-17T21:30:38+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://momobaba.top/post/go-rabbitmq/"
+    "@id": "http://localhost:1313/post/go-rabbitmq/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "莫小白的技术博客",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
+      "url": "http://localhost:1313/%3Clink%20/%20abs%20url%3E"
     }
   }
 }
@@ -154,7 +187,7 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <a href="http://localhost:1313/" accesskey="h" title="首页 (Alt + H)">首页</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -176,26 +209,28 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://momobaba.top/archives/" title="归档">
+                <a href="http://localhost:1313/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/search/" title="搜索">
+                <a href="http://localhost:1313/search/" title="搜索">
                     <span>搜索</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://momobaba.top/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -211,11 +246,11 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/post/">Posts</a></div>
     <h1 class="post-title">
       Go Rabbitmq 示例代码
     </h1>
-    <div class="post-meta"><span title='2022-12-17 21:30:38 +0800 CST'>December 17, 2022</span>&nbsp;·&nbsp;4 min
+    <div class="post-meta">&lt;span title=&#39;2022-12-17 21:30:38 &#43;0800 CST&#39;&gt;December 17, 2022&lt;/span&gt;&amp;nbsp;·&amp;nbsp;4 min
 
 </div>
   </header> <div class="toc">
@@ -809,17 +844,17 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://momobaba.top/tags/golang/">Golang</a></li>
-      <li><a href="https://momobaba.top/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a></li>
-      <li><a href="https://momobaba.top/tags/rabbitmq/">RabbitMQ</a></li>
+      <li><a href="http://localhost:1313/tags/golang/">Golang</a></li>
+      <li><a href="http://localhost:1313/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a></li>
+      <li><a href="http://localhost:1313/tags/rabbitmq/">RabbitMQ</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://momobaba.top/post/kafka/">
+  <a class="prev" href="http://localhost:1313/post/kafka/">
     <span class="title">« Prev</span>
     <br>
     <span>Kafka介绍以及常见问题总结</span>
   </a>
-  <a class="next" href="https://momobaba.top/post/etcd/">
+  <a class="next" href="http://localhost:1313/post/etcd/">
     <span class="title">Next »</span>
     <br>
     <span>Etcd部署以及以及应用</span>
@@ -840,7 +875,7 @@ Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://momobaba.top/">莫小白的技术博客</a></span>
+    <span>&copy; 2024 <a href="http://localhost:1313/">莫小白的技术博客</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
