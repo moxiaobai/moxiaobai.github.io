@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<head><meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta
   name="viewport"
@@ -16,7 +16,7 @@
   name="keywords"
   content="Golang"
 /> <meta name="description" content="pprof 是 golang 官方提供的性能调优分析工具，可以对程序进行性能分析，并可视化数据，看起来相当的直观。
-当你的 go 程序遇到性能瓶颈时，可以使用这个工具来进行调试并优化程序。"> <meta name="author" content=""> <link rel="canonical" href="http://localhost:1313/post/golang-pprof/">
+当你的 go 程序遇到性能瓶颈时，可以使用这个工具来进行调试并优化程序。"> <meta name="author" content=""> <link rel="canonical" href="https://momobaba.top/post/golang-pprof/">
 <link
   crossorigin="anonymous"
   href="/assets/css/stylesheet.79ee8125cfdc8fd93dc42a993d3b57d95789de44fe593f658af8d0fbbeb93148.css"
@@ -30,10 +30,10 @@
   src="/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js"
   integrity="sha256-rLVP0yu8GYJCi4hQMX5F0Ha5UBJzClk2Zn5rwhd3aSo="
   onload="hljs.initHighlightingOnLoad();"
-></script> <link rel="icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link
-rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E">
-<link rel="apple-touch-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <link rel="mask-icon" href="http://localhost:1313/%3Clink%20/%20abs%20url%3E"> <meta name="theme-color" content="#2e2e33"> <meta name="msapplication-TileColor" content="#2e2e33"> <link rel="alternate" hreflang="en" href="http://localhost:1313/post/golang-pprof/" />
+></script> <link rel="icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E"> <link
+rel="icon" type="image/png" sizes="16x16" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E"> <link rel="mask-icon" href="https://momobaba.top/%3Clink%20/%20abs%20url%3E"> <meta name="theme-color" content="#2e2e33"> <meta name="msapplication-TileColor" content="#2e2e33"> <link rel="alternate" hreflang="en" href="https://momobaba.top/post/golang-pprof/" />
 <noscript>
   <style>
     #theme-toggle,
@@ -96,9 +96,9 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
   property="og:type"
   content="article"
 />
-<meta property="og:url" content="http://localhost:1313/post/golang-pprof/" /><meta
+<meta property="og:url" content="https://momobaba.top/post/golang-pprof/" /><meta
   property="og:image"
-  content="http://localhost:1313/papermod-cover.png"
+  content="https://momobaba.top/papermod-cover.png"
 /><meta property="article:section" content="post" />
 <meta
   property="article:published_time"
@@ -111,7 +111,7 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
   content="莫小白的技术博客"
 /> 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/papermod-cover.png" />
+<meta name="twitter:image" content="https://momobaba.top/papermod-cover.png" />
 
 <meta name="twitter:title" content="Golang pprof性能分析" />
 <meta
@@ -130,13 +130,13 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/post/"
+      "item": "https://momobaba.top/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Golang pprof性能分析",
-      "item": "http://localhost:1313/post/golang-pprof/"
+      "item": "https://momobaba.top/post/golang-pprof/"
     }
   ]
 }
@@ -158,14 +158,14 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
   "dateModified": "2022-11-27T21:28:51+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/post/golang-pprof/"
+    "@id": "https://momobaba.top/post/golang-pprof/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "莫小白的技术博客",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/%3Clink%20/%20abs%20url%3E"
+      "url": "https://momobaba.top/%3Clink%20/%20abs%20url%3E"
     }
   }
 }
@@ -187,7 +187,7 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="首页 (Alt + H)">首页</a>
+            <a href="https://momobaba.top/" accesskey="h" title="首页 (Alt + H)">首页</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -215,22 +215,22 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="归档">
+                <a href="https://momobaba.top/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="搜索">
+                <a href="https://momobaba.top/search/" title="搜索">
                     <span>搜索</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="分类">
+                <a href="https://momobaba.top/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="标签">
+                <a href="https://momobaba.top/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -246,7 +246,7 @@ rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/%3Clink%20
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/post/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://momobaba.top/">Home</a>&nbsp;»&nbsp;<a href="https://momobaba.top/post/">Posts</a></div>
     <h1 class="post-title">
       Golang pprof性能分析
     </h1>
@@ -478,15 +478,15 @@ x 轴表示抽样数，如果一个函数在 x 轴占据的宽度越宽，就表
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/golang/">Golang</a></li>
+      <li><a href="https://momobaba.top/tags/golang/">Golang</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/post/etcd/">
+  <a class="prev" href="https://momobaba.top/post/etcd/">
     <span class="title">« Prev</span>
     <br>
     <span>Etcd部署以及以及应用</span>
   </a>
-  <a class="next" href="http://localhost:1313/post/rabbitmq-exchange/">
+  <a class="next" href="https://momobaba.top/post/rabbitmq-exchange/">
     <span class="title">Next »</span>
     <br>
     <span>RabbitMQ 交换器常用三种类型介绍</span>
@@ -507,7 +507,7 @@ x 轴表示抽样数，如果一个函数在 x 轴占据的宽度越宽，就表
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="http://localhost:1313/">莫小白的技术博客</a></span>
+    <span>&copy; 2024 <a href="https://momobaba.top/">莫小白的技术博客</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

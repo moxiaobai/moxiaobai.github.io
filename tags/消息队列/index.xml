@@ -2,33 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>消息队列 on 莫小白的技术博客</title>
-    <link>http://localhost:1313/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+    <link>https://momobaba.top/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
     <description>Recent content in 消息队列 on 莫小白的技术博客</description>
     <image>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://momobaba.top/papermod-cover.png</url>
+      <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 02 Jan 2023 20:32:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Jan 2023 20:32:05 +0800</lastBuildDate><atom:link href="https://momobaba.top/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go Kafka示例代码</title>
-      <link>http://localhost:1313/post/go-kafaka/</link>
+      <link>https://momobaba.top/post/go-kafaka/</link>
       <pubDate>Mon, 02 Jan 2023 20:32:05 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/go-kafaka/</guid>
+      <guid>https://momobaba.top/post/go-kafaka/</guid>
       <description>&lt;hr&gt;
 &lt;p&gt;Go Kafka 示例代码, 使用&lt;a href=&#34;https://github.com/segmentio/kafka-go&#34; target=&#34;_blank&#34;&gt;github.com/streadway/amqp&lt;/a&gt;库, 包含生产和消费示例代码&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kafka介绍以及常见问题总结</title>
-      <link>http://localhost:1313/post/kafka/</link>
+      <link>https://momobaba.top/post/kafka/</link>
       <pubDate>Mon, 26 Dec 2022 21:31:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/kafka/</guid>
+      <guid>https://momobaba.top/post/kafka/</guid>
       <description>&lt;h2 id=&#34;kafka介绍&#34;&gt;Kafka介绍&lt;/h2&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/img/kafka-info.png&#34; alt=&#34;kafka介绍&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://momobaba.top/img/kafka-info.png&#34; alt=&#34;kafka介绍&#34;  /&gt;
 &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Kafka 比较重要的几个概念：&lt;/p&gt;
@@ -77,20 +77,20 @@
     
     <item>
       <title>Go Rabbitmq 示例代码</title>
-      <link>http://localhost:1313/post/go-rabbitmq/</link>
+      <link>https://momobaba.top/post/go-rabbitmq/</link>
       <pubDate>Sat, 17 Dec 2022 21:30:38 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/go-rabbitmq/</guid>
+      <guid>https://momobaba.top/post/go-rabbitmq/</guid>
       <description>&lt;hr&gt;
 &lt;p&gt;Go Rabbitmq 示例代码, 使用github.com/streadway/amqp库, 包含生产和消费示例代码&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>RabbitMQ 交换器常用三种类型介绍</title>
-      <link>http://localhost:1313/post/rabbitmq-exchange/</link>
+      <link>https://momobaba.top/post/rabbitmq-exchange/</link>
       <pubDate>Mon, 21 Nov 2022 15:30:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/rabbitmq-exchange/</guid>
+      <guid>https://momobaba.top/post/rabbitmq-exchange/</guid>
       <description>&lt;hr&gt;
 &lt;p&gt;RabbitMQ 交换器常用三种类型介绍：direct: (默认)直接交换器；fanout: 广播式交换器； topic:  主题交换器&lt;/p&gt;</description>
     </item>

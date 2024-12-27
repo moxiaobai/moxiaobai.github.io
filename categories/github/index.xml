@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Github on 莫小白的技术博客</title>
-    <link>http://localhost:1313/categories/github/</link>
+    <link>https://momobaba.top/categories/github/</link>
     <description>Recent content in Github on 莫小白的技术博客</description>
     <image>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://momobaba.top/papermod-cover.png</url>
+      <link>https://momobaba.top/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 15 Sep 2022 11:30:03 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 11:30:03 +0000</lastBuildDate><atom:link href="https://momobaba.top/categories/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Restful API示例文档</title>
-      <link>http://localhost:1313/post/my-first-post/</link>
+      <link>https://momobaba.top/post/my-first-post/</link>
       <pubDate>Thu, 15 Sep 2022 11:30:03 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/my-first-post/</guid>
+      <guid>https://momobaba.top/post/my-first-post/</guid>
       <description>&lt;p&gt;Restful API示例文档&lt;/p&gt;</description>
     </item>
     
